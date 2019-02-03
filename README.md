@@ -1,6 +1,6 @@
 # Mentor's International
 
-Front-end portion for Build week's Mentor's International
+Front-end portion for LambdaSchool's Build week: Mentor's International
 
 ## Installation
 
