@@ -18,6 +18,15 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'base'
+  },
+  input: {
+    marginLeft: '10px',
+    paddingLeft: '10px'
   }
 };
 
@@ -27,17 +36,37 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='Menu'
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' color='inherit' className={classes.grow}>
-            News
-          </Typography>
-          <Button color='inherit'>Login</Button>
+          {props.isLoggedIn ? (
+            <IconButton
+              className={classes.menuButton}
+              color='inherit'
+              aria-label='Menu'
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Typography variant='h6' color='inherit' className={classes.grow}>
+              Mentor's International Training Reminders
+            </Typography>
+          )}
+
+          <form className={classes.form}>
+            <input
+              type='email'
+              placeholder='Email'
+              required
+              className={classes.input}
+            />
+            <input
+              type='password'
+              placeholder='Password'
+              required
+              className={classes.input}
+            />
+            <Button type='submit' color='inherit'>
+              Login
+            </Button>
+          </form>
         </Toolbar>
       </AppBar>
     </div>

@@ -15,7 +15,7 @@ class App extends React.Component {
     console.log(this.props);
     return (
       <>
-        <Navbar />
+        <Navbar isLoggedIn={this.props.isLoggedIn} />
         <Route
           exact
           path='/'
