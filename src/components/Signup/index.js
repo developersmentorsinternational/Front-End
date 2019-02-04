@@ -4,13 +4,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-
+import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import { connect } from 'react-redux';
+import { handleChange, register } from '../../store/actions';
 
 const styles = theme => ({
   main: {
@@ -42,11 +46,54 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
+  },
+  phone: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  formControl: {
+    marginTop: '24px'
+  },
+  phoneNumber: {
+    marginLeft: '20px',
+    width: '281px'
   }
 });
 
 function SignupForm(props) {
-  const { classes } = props;
+  const handleChange = e => {
+    props.handleChange(e.target.name, e.target.value);
+  };
+
+  const handleRegisterSubmit = e => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      return alert("Passwords don't match");
+    }
+    const user = {
+      email,
+      firstName,
+      lastName,
+      password,
+      countryCode,
+      phoneNumber
+    };
+    props.register(email, firstName, lastName, password, phoneNumber);
+  };
+
+  const {
+    classes,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    countryCode,
+    password,
+    confirmPassword
+  } = props;
+
+  console.log(props);
 
   return (
     <main className={classes.main}>
@@ -58,43 +105,71 @@ function SignupForm(props) {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleRegisterSubmit}>
           <FormControl margin='normal' required fullWidth>
             <InputLabel htmlFor='firstname'>First Name</InputLabel>
             <Input
-              id='firstname'
-              name='firstname'
+              id='firstName'
+              name='firstName'
               autoComplete='firstname'
               autoFocus
-              value=''
+              value={firstName}
+              onChange={handleChange}
             />
           </FormControl>
           <FormControl margin='normal' required fullWidth>
             <InputLabel htmlFor='lastname'>Last Name</InputLabel>
             <Input
-              id='lastname'
-              name='lastname'
+              id='lastName'
+              name='lastName'
               autoComplete='lastname'
-              value=''
+              value={lastName}
+              onChange={handleChange}
             />
           </FormControl>
           <FormControl margin='normal' required fullWidth>
             <InputLabel htmlFor='email'>Email Address</InputLabel>
-            <Input id='email' name='email' autoComplete='email' />
-          </FormControl>
-          <FormControl margin='normal' required fullWidth>
-            <InputLabel htmlFor='lastname'>Phone Number</InputLabel>
             <Input
-              type='tel'
-              id='phone'
-              name='phone'
-              autoComplete='phone'
-              pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-              required
-              placeholder='123-456-7890'
-              value=''
+              id='email'
+              name='email'
+              autoComplete='email'
+              value={email}
+              onChange={handleChange}
             />
           </FormControl>
+          <div className={classes.phone}>
+            <FormControl className={classes.formControl} disabled>
+              <Select
+                value={countryCode}
+                onChange={handleChange}
+                input={<Input name='countryCode' id='name-disabled' />}
+              >
+                <MenuItem value=''>
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value='1'>+1</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              margin='normal'
+              required
+              className={classes.phoneNumber}
+            >
+              <InputLabel htmlFor='phone'> Phone Number</InputLabel>
+              <Input
+                type='tel'
+                id='phone'
+                name='phoneNumber'
+                autoComplete='phone'
+                pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                required
+                placeholder='123-456-7890'
+                value={phoneNumber}
+                onChange={handleChange}
+              />
+            </FormControl>
+          </div>
+
           <FormControl margin='normal' required fullWidth>
             <InputLabel htmlFor='password'>Password</InputLabel>
             <Input
@@ -102,6 +177,8 @@ function SignupForm(props) {
               type='password'
               id='password'
               autoComplete='current-password'
+              value={password}
+              onChange={handleChange}
             />
           </FormControl>
           <FormControl margin='normal' required fullWidth>
@@ -110,7 +187,8 @@ function SignupForm(props) {
               name='confirmPassword'
               type='password'
               id='confirmPassword'
-              value=''
+              value={confirmPassword}
+              onChange={handleChange}
             />
           </FormControl>
           <Button
@@ -129,7 +207,29 @@ function SignupForm(props) {
 }
 
 SignupForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  email: PropTypes.string,
+  phoneNumber: PropTypes.string,
+  password: PropTypes.string,
+  confirmPassword: PropTypes.string,
+  countryCode: PropTypes.string
 };
 
-export default withStyles(styles)(SignupForm);
+const mapStateToProps = state => ({
+  firstName: state.auth.firstName,
+  lastName: state.auth.lastName,
+  email: state.auth.email,
+  phoneNumber: state.auth.phoneNumber,
+  password: state.auth.password,
+  confirmPassword: state.auth.confirmPassword,
+  loginEmail: state.auth.loginEmail,
+  loginPassword: state.auth.loginPassword,
+  countryCode: state.auth.countryCode
+});
+
+export default connect(
+  mapStateToProps,
+  { handleChange, register }
+)(withStyles(styles)(SignupForm));

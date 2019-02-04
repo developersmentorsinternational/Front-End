@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { connect } from 'react-redux';
+import { handleChange, login } from '../../store/actions';
 
 const styles = {
   root: {
@@ -33,12 +35,21 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
-  const { classes } = props;
+  const handleChange = e => {
+    props.handleChange(e.target.name, e.target.value);
+  };
+
+  const handleLoginSubmit = e => {
+    e.preventDefault();
+    props.login(loginEmail, loginPassword);
+  };
+
+  const { classes, loginEmail, loginPassword } = props;
   return (
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
-          {props.isLogginSuccess ? (
+          {props.isLogginSuccess || props.isRegisterSuccess ? (
             <IconButton
               className={classes.menuButton}
               color='inherit'
@@ -52,18 +63,24 @@ function ButtonAppBar(props) {
             </Typography>
           )}
 
-          {props.isLogginSuccess ? null : (
-            <form className={classes.form}>
+          {props.isLogginSuccess || props.isRegisterSuccess ? null : (
+            <form className={classes.form} onSubmit={handleLoginSubmit}>
               <input
                 type='email'
                 placeholder='Email'
                 required
+                name='loginEmail'
+                value={loginEmail}
+                onChange={handleChange}
                 className={classes.input}
               />
               <input
                 type='password'
                 placeholder='Password'
                 required
+                name='loginPassword'
+                value={loginPassword}
+                onChange={handleChange}
                 className={classes.input}
               />
               <Button type='submit' color='inherit'>
@@ -81,4 +98,12 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ButtonAppBar);
+const mapStateToProps = state => ({
+  loginPassword: state.auth.loginPassword,
+  loginEmail: state.auth.loginEmail
+});
+
+export default connect(
+  mapStateToProps,
+  { handleChange, login }
+)(withStyles(styles)(ButtonAppBar));

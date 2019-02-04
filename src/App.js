@@ -15,7 +15,10 @@ class App extends React.Component {
     console.log(this.props);
     return (
       <>
-        <Navbar isLogginSuccess={this.props.isLogginSuccess} />
+        <Navbar
+          isLogginSuccess={this.props.isLogginSuccess}
+          isRegisterSuccess={this.props.isRegisterSuccess}
+        />
         <Route
           exact
           path='/'
@@ -23,6 +26,7 @@ class App extends React.Component {
             <Authorization
               {...props}
               isLogginSuccess={this.props.isLogginSuccess}
+              isRegisterSuccess={this.props.isRegisterSuccess}
             />
           )}
         />
@@ -34,7 +38,8 @@ class App extends React.Component {
 const Authorization = Authorize(DashboardView)(SignupView);
 
 const mapStateToProps = state => ({
-  isLogginSuccess: state.auth.isLogginSuccess
+  isLogginSuccess: state.auth.isLogginSuccess,
+  isRegisterSuccess: state.auth.isRegisterSuccess
 });
 
 export default connect(

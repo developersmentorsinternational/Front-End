@@ -1,7 +1,7 @@
 import React from 'react';
 import SignupForm from '../components/Signup';
 
-const SignupView = () => {
+const SignupView = props => {
   return (
     <div>
       <SignupForm />

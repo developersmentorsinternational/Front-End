@@ -5,35 +5,60 @@ import {
   REGISTER_SUCCESS,
   LOGIN_FAILED,
   LOGIN_LOADING,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  HANDLE_CHANGES
 } from '../types';
+
+export const handleChange = (name, value) => ({
+  type: HANDLE_CHANGES,
+  payload: {
+    name,
+    value
+  }
+});
 
 const baseURL = 'https://mentors-international.herokuapp.com';
 
-export const register = user => dispatch => {
+export const register = (
+  email,
+  firstName,
+  lastName,
+  password,
+  phoneNumber
+) => dispatch => {
   dispatch({
     type: REGISTER_LOADING
   });
-  axios.post(`${baseURL}/register`, { user }).then(res => {
-    console.log(res.data);
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: res.data
-    }).catch(err =>
+  return axios
+    .post(`${baseURL}/register`, {
+      email,
+      firstName,
+      lastName,
+      password,
+      countryCode: '1',
+      phoneNumber
+    })
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
       dispatch({
         type: REGISTER_FAILED,
         payload: err
       })
     );
-  });
 };
 
-export const login = user => dispatch => {
+export const login = (loginEmail, loginPassword) => dispatch => {
   dispatch({
     type: LOGIN_LOADING
   });
   axios
-    .post(`${baseURL}/login`, user)
+    .post(`${baseURL}/login`, { email: loginEmail, password: loginPassword })
     .then(res => {
       console.log(res.data);
       dispatch({
