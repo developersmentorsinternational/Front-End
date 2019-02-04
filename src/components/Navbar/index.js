@@ -38,7 +38,7 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
-          {props.isLoggedIn ? (
+          {props.isLogginSuccess ? (
             <IconButton
               className={classes.menuButton}
               color='inherit'
@@ -52,7 +52,7 @@ function ButtonAppBar(props) {
             </Typography>
           )}
 
-          {props.isLoggedIn ? null : (
+          {props.isLogginSuccess ? null : (
             <form className={classes.form}>
               <input
                 type='email'

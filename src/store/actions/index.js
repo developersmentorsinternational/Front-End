@@ -12,8 +12,7 @@ const baseURL = 'https://mentors-international.herokuapp.com';
 
 export const register = user => dispatch => {
   dispatch({
-    type: REGISTER_LOADING,
-    payload: true
+    type: REGISTER_LOADING
   });
   axios.post(`${baseURL}/register`, { user }).then(res => {
     console.log(res.data);
@@ -31,8 +30,7 @@ export const register = user => dispatch => {
 
 export const login = user => dispatch => {
   dispatch({
-    type: LOGIN_LOADING,
-    payload: true
+    type: LOGIN_LOADING
   });
   axios
     .post(`${baseURL}/login`, user)

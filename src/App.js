@@ -9,18 +9,21 @@ import Navbar from './components/Navbar';
 
 class App extends React.Component {
   componentDidMount() {
-    console.log('hello: ', this.props.isLoggedIn);
+    console.log('hello: ', this.props.isLogginSuccess);
   }
   render() {
     console.log(this.props);
     return (
       <>
-        <Navbar isLoggedIn={this.props.isLoggedIn} />
+        <Navbar isLogginSuccess={this.props.isLogginSuccess} />
         <Route
           exact
           path='/'
           render={props => (
-            <Authorization {...props} isLoggedIn={this.props.isLoggedIn} />
+            <Authorization
+              {...props}
+              isLogginSuccess={this.props.isLogginSuccess}
+            />
           )}
         />
       </>
@@ -31,7 +34,7 @@ class App extends React.Component {
 const Authorization = Authorize(DashboardView)(SignupView);
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn
+  isLogginSuccess: state.auth.isLogginSuccess
 });
 
 export default connect(
