@@ -1,10 +1,13 @@
 const initialState = {
-  user: {}
+  user: {},
+  isLoggedIn: false
 };
 
-export default function(state = initialState, action) {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
-}
+};
+
+export default loginReducer;

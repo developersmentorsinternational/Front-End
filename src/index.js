@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, withRouter } from 'react-router-dom';
-import store from './store';
+import store from './store/index';
 
 const AppWithRouter = withRouter(App);
 
