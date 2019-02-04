@@ -22,11 +22,13 @@ const styles = {
   form: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'base'
+    alignItems: 'center'
   },
   input: {
     marginLeft: '10px',
-    paddingLeft: '10px'
+    paddingLeft: '10px',
+    borderRadius: '3px',
+    height: '25px'
   }
 };
 
@@ -50,23 +52,25 @@ function ButtonAppBar(props) {
             </Typography>
           )}
 
-          <form className={classes.form}>
-            <input
-              type='email'
-              placeholder='Email'
-              required
-              className={classes.input}
-            />
-            <input
-              type='password'
-              placeholder='Password'
-              required
-              className={classes.input}
-            />
-            <Button type='submit' color='inherit'>
-              Login
-            </Button>
-          </form>
+          {props.isLoggedIn ? null : (
+            <form className={classes.form}>
+              <input
+                type='email'
+                placeholder='Email'
+                required
+                className={classes.input}
+              />
+              <input
+                type='password'
+                placeholder='Password'
+                required
+                className={classes.input}
+              />
+              <Button type='submit' color='inherit'>
+                Login
+              </Button>
+            </form>
+          )}
         </Toolbar>
       </AppBar>
     </div>

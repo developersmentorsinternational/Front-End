@@ -31,7 +31,7 @@ class App extends React.Component {
 const Authorization = Authorize(DashboardView)(SignupView);
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.loginReducer.isLoggedIn
+  isLoggedIn: state.auth.isLoggedIn
 });
 
 export default connect(
