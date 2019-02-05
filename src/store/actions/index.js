@@ -40,6 +40,7 @@ export const register = (
     })
     .then(res => {
       console.log(res.data);
+      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -61,9 +62,10 @@ export const login = (loginEmail, loginPassword) => dispatch => {
     .post(`${baseURL}/login`, { email: loginEmail, password: loginPassword })
     .then(res => {
       console.log(res);
+      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res
+        payload: res.data
       });
     })
     .catch(err =>
