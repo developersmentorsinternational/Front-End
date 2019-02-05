@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
 import { handleChange, login } from '../../store/actions';
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -43,7 +43,7 @@ function ButtonAppBar(props) {
   const handleLoginSubmit = e => {
     e.preventDefault();
     props.login(loginEmail, loginPassword);
-    // props.history.push('/dashboard');
+    props.history.push('/dashboard');
   };
 
   const { classes, loginEmail, loginPassword } = props;
@@ -96,4 +96,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { handleChange, login }
-)(withStyles(styles)(ButtonAppBar));
+)(withStyles(styles)(withRouter(ButtonAppBar)));

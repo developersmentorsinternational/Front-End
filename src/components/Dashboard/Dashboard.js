@@ -25,7 +25,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import { logout } from '../../store/actions';
 
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import MessagePage from '../../view/MessagePage';
 import SchedulePage from '../../view/SchedulePage';
 import HomePageView from '../../view/HomePageView';
@@ -135,11 +135,12 @@ class Dashboard extends React.Component {
     this.props.logout();
     this.setState({ powerOpen: false });
     localStorage.clear();
+    this.props.history.push('/signup');
   };
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props);
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -187,14 +188,8 @@ class Dashboard extends React.Component {
                 aria-labelledby='alert-dialog-title'
                 aria-describedby='alert-dialog-description'
               >
-                <DialogTitle id='alert-dialog-title'>
-                  {"Use Google's location service?"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id='alert-dialog-description'>
-                    Do you want to log out?.
-                  </DialogContentText>
-                </DialogContent>
+                <DialogTitle id='alert-dialog-title'>{'Log Out?'}</DialogTitle>
+                <DialogContent />
                 <DialogActions>
                   <Button onClick={this.handlePowerClose} color='primary'>
                     Disagree
@@ -250,4 +245,4 @@ Dashboard.propTypes = {
 export default connect(
   null,
   { logout }
-)(withStyles(styles)(Dashboard));
+)(withStyles(styles)(withRouter(Dashboard)));

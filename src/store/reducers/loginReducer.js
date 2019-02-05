@@ -69,7 +69,9 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoginLoading: false,
-        isLogginSuccess: true
+        isLogginSuccess: true,
+        loginEmail: '',
+        loginPassword: ''
       };
     case LOGIN_FAILED:
       return {
