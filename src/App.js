@@ -5,7 +5,6 @@ import Authorize from './components/Authorization/Authorize';
 import DashboardView from './view/DashboardView';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Navbar from './components/Navbar';
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,10 +14,6 @@ class App extends React.Component {
     console.log(this.props);
     return (
       <>
-        <Navbar
-          isLogginSuccess={this.props.isLogginSuccess}
-          isRegisterSuccess={this.props.isRegisterSuccess}
-        />
         <Route
           exact
           path='/'

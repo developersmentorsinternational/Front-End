@@ -1,9 +1,10 @@
 import React from 'react';
+import Dashboard from '../components/Dashboard/Dashboard';
 
 const DashboardView = () => {
   return (
     <div>
-      <h1>Logged in!</h1>
+      <Dashboard />
     </div>
   );
 };

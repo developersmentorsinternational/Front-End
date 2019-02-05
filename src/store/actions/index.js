@@ -60,10 +60,10 @@ export const login = (loginEmail, loginPassword) => dispatch => {
   axios
     .post(`${baseURL}/login`, { email: loginEmail, password: loginPassword })
     .then(res => {
-      console.log(res.data);
+      console.log(res);
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res
       });
     })
     .catch(err =>
