@@ -6,7 +6,7 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   HANDLE_CHANGES,
-  LOGOUT_SUCESS
+  LOGOUT_SUCCESS
 } from '../types';
 
 const initialState = {
@@ -26,7 +26,8 @@ const initialState = {
   loginEmail: '',
   loginPassword: '',
   countryCode: '1',
-  message: ''
+  message: '',
+  error: ''
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -44,7 +45,7 @@ const loginReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        message: action.payload,
+        user: action.payload,
         isRegisterLoading: false,
         isRegisterSuccess: true,
         firstName: '',
@@ -66,12 +67,14 @@ const loginReducer = (state = initialState, action) => {
         isLoginLoading: true
       };
     case LOGIN_SUCCESS:
+      console.log(state.message);
       return {
         ...state,
         isLoginLoading: false,
         isLogginSuccess: true,
         loginEmail: '',
-        loginPassword: ''
+        loginPassword: '',
+        message: action.payload
       };
     case LOGIN_FAILED:
       return {
@@ -79,7 +82,7 @@ const loginReducer = (state = initialState, action) => {
         isLoginLoading: false,
         isLoginFailed: true
       };
-    case LOGOUT_SUCESS:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         isLogginSuccess: false

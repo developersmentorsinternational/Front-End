@@ -135,12 +135,10 @@ class Dashboard extends React.Component {
     this.props.logout();
     this.setState({ powerOpen: false });
     localStorage.clear();
-    this.props.history.push('/signup');
   };
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -191,7 +189,7 @@ class Dashboard extends React.Component {
                 <DialogTitle id='alert-dialog-title'>{'Log Out?'}</DialogTitle>
                 <DialogContent />
                 <DialogActions>
-                  <Button onClick={this.handlePowerClose} color='primary'>
+                  <Button  color='primary'>
                     Disagree
                   </Button>
                   <Button onClick={this.logout} color='secondary' autoFocus>

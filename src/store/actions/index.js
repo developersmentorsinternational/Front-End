@@ -7,7 +7,7 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   HANDLE_CHANGES,
-  LOGOUT_SUCESS
+  LOGOUT_SUCCESS
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -40,33 +40,34 @@ export const register = (
       phoneNumber
     })
     .then(res => {
-      console.log(res.data);
+      console.log(res);
       localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       });
     })
-    .catch(err =>
+    .catch(err => {
+      console.log(err);
       dispatch({
         type: REGISTER_FAILED,
         payload: err
-      })
-    );
+      });
+    });
 };
 
-export const login = (loginEmail, loginPassword) => dispatch => {
+export const login = (email, password) => dispatch => {
   dispatch({
     type: LOGIN_LOADING
   });
   axios
-    .post(`${baseURL}/login`, { email: loginEmail, password: loginPassword })
+    .post(`${baseURL}/login`, { email, password })
     .then(res => {
       console.log(res);
       localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data.message
       });
     })
     .catch(err =>
@@ -82,7 +83,7 @@ export const logout = () => dispatch => {
     .get(`${baseURL}/api/logout`)
     .then(res =>
       dispatch({
-        type: LOGOUT_SUCESS,
+        type: LOGOUT_SUCCESS,
         payload: res.data
       })
     )

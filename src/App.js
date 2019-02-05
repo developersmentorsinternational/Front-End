@@ -7,19 +7,13 @@ import { connect } from 'react-redux';
 
 class App extends React.Component {
   componentDidMount() {
-    if (this.props.isLogginSuccess || this.props.isRegisterSuccess) {
+    if (localStorage.getItem('data')) {
       this.props.history.push('/dashboard');
     } else {
       this.props.history.push('/signup');
     }
-
-    if (localStorage.getItem('data')) {
-      this.props.history.push('/dashboard');
-    }
   }
   render() {
-    console.log(this.props);
-
     return (
       <>
         <Route path='/dashboard' component={DashboardView} />
