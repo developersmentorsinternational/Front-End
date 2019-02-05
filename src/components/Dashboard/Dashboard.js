@@ -14,8 +14,21 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import { mainListItems, secondaryListItems } from './listItem';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { connect } from 'react-redux';
+import { logout } from '../../store/actions';
+
 import { Route } from 'react-router-dom';
+import MessagePage from '../../view/MessagePage';
+import SchedulePage from '../../view/SchedulePage';
+import HomePageView from '../../view/HomePageView';
 
 const drawerWidth = 240;
 
@@ -98,7 +111,8 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
   state = {
-    open: false
+    open: false,
+    powerOpen: false
   };
 
   handleDrawerOpen = () => {
@@ -107,6 +121,20 @@ class Dashboard extends React.Component {
 
   handleDrawerClose = () => {
     this.setState({ open: false });
+  };
+
+  handlePowerOpen = () => {
+    this.setState({ powerOpen: true });
+  };
+
+  handlePowerClose = () => {
+    this.setState({ powerOpen: false });
+  };
+
+  logout = () => {
+    this.props.logout();
+    this.setState({ powerOpen: false });
+    localStorage.clear();
   };
 
   render() {
@@ -151,6 +179,32 @@ class Dashboard extends React.Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <IconButton color='inherit' onClick={this.handlePowerOpen}>
+              <PowerSettingsNew />
+              <Dialog
+                open={this.state.powerOpen}
+                onClose={this.handlePowerClose}
+                aria-labelledby='alert-dialog-title'
+                aria-describedby='alert-dialog-description'
+              >
+                <DialogTitle id='alert-dialog-title'>
+                  {"Use Google's location service?"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id='alert-dialog-description'>
+                    Do you want to log out?.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handlePowerClose} color='primary'>
+                    Disagree
+                  </Button>
+                  <Button onClick={this.logout} color='secondary' autoFocus>
+                    Agree
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -175,7 +229,9 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-
+          <Route path='/dashboard/' component={HomePageView} />
+          <Route path='/dashboard/message' component={MessagePage} />
+          <Route path='/dashboard/schedule' component={SchedulePage} />
           <div className={classes.tableContainer} />
         </main>
       </div>
@@ -187,4 +243,7 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+export default connect(
+  null,
+  { logout }
+)(withStyles(styles)(Dashboard));

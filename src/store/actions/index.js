@@ -6,7 +6,8 @@ import {
   LOGIN_FAILED,
   LOGIN_LOADING,
   LOGIN_SUCCESS,
-  HANDLE_CHANGES
+  HANDLE_CHANGES,
+  LOGOUT_SUCESS
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -74,4 +75,16 @@ export const login = (loginEmail, loginPassword) => dispatch => {
         payload: err
       })
     );
+};
+
+export const logout = () => dispatch => {
+  return axios
+    .get(`${baseURL}/api/logout`)
+    .then(res =>
+      dispatch({
+        type: LOGOUT_SUCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
 };

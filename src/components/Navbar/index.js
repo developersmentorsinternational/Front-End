@@ -51,48 +51,10 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
-          {/* {props.isLogginSuccess || props.isRegisterSuccess ? (
-            <IconButton
-              className={classes.menuButton}
-              color='inherit'
-              aria-label='Menu'
-            >
-              <MenuIcon />
-            </IconButton>
-          ) : (
-            <Typography variant='h6' color='inherit' className={classes.grow}>
-              Mentor's International Training Reminders
-            </Typography>
-          )} */}
           <Typography variant='h6' color='inherit' className={classes.grow}>
             Mentor's International Training Reminders
           </Typography>
 
-          {/* {props.isLogginSuccess || props.isRegisterSuccess ? null : (
-            <form className={classes.form} onSubmit={handleLoginSubmit}>
-              <input
-                type='email'
-                placeholder='Email'
-                required
-                name='loginEmail'
-                value={loginEmail}
-                onChange={handleChange}
-                className={classes.input}
-              />
-              <input
-                type='password'
-                placeholder='Password'
-                required
-                name='loginPassword'
-                value={loginPassword}
-                onChange={handleChange}
-                className={classes.input}
-              />
-              <Button type='submit' color='inherit'>
-                Login
-              </Button>
-            </form>
-          )} */}
           <form className={classes.form} onSubmit={handleLoginSubmit}>
             <input
               type='email'

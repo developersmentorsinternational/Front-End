@@ -9,9 +9,13 @@ import { connect } from 'react-redux';
 class App extends React.Component {
   componentDidMount() {
     console.log('hello: ', this.props.isLogginSuccess);
+    if (localStorage.getItem('data')) {
+      this.props.history.push('/dashboard');
+    }
   }
   render() {
     console.log(this.props);
+
     return (
       <>
         <Route
