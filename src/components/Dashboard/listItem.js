@@ -9,62 +9,63 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { NavLink, withRouter } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary='Dashboard' />
-    </ListItem>
-    <ListItem button>
+    <NavLink to='/dashboard/'>
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary='Dashboard' />
+      </ListItem>
+    </NavLink>
+    {/* <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary='Orders' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary='Customers' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary='Reports' />
-    </ListItem>
+    </ListItem> */}
+    <NavLink to='/dashboard/message'>
+      <ListItem button>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary='Send a Message' />
+      </ListItem>
+    </NavLink>
+    <NavLink to='/dashboard/schedule'>
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary='Add a Schedule' />
+      </ListItem>
+    </NavLink>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary='Integrations' />
+      <ListItemText primary='Settings' />
     </ListItem>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset>Reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary='Current month' />
+      <ListItemText primary='Loan Information' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary='Last quarter' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary='Year-end sale' />
+      <ListItemText primary='Attendance' />
     </ListItem>
   </div>
 );

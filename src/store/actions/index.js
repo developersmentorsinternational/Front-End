@@ -6,7 +6,8 @@ import {
   LOGIN_FAILED,
   LOGIN_LOADING,
   LOGIN_SUCCESS,
-  HANDLE_CHANGES
+  HANDLE_CHANGES,
+  LOGOUT_SUCESS
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -40,6 +41,7 @@ export const register = (
     })
     .then(res => {
       console.log(res.data);
+      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -61,9 +63,10 @@ export const login = (loginEmail, loginPassword) => dispatch => {
     .post(`${baseURL}/login`, { email: loginEmail, password: loginPassword })
     .then(res => {
       console.log(res);
+      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res
+        payload: res.data
       });
     })
     .catch(err =>
@@ -72,4 +75,16 @@ export const login = (loginEmail, loginPassword) => dispatch => {
         payload: err
       })
     );
+};
+
+export const logout = () => dispatch => {
+  return axios
+    .get(`${baseURL}/api/logout`)
+    .then(res =>
+      dispatch({
+        type: LOGOUT_SUCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
 };

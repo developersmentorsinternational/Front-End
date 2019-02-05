@@ -1,10 +1,13 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard/Dashboard';
 
-const DashboardView = () => {
+const DashboardView = props => {
+  if (!localStorage.getItem('data')) {
+    props.history.push('/signup');
+  }
   return (
     <div>
-      <Dashboard />
+      <Dashboard {...props} />
     </div>
   );
 };

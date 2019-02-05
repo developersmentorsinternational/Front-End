@@ -5,7 +5,8 @@ import {
   LOGIN_FAILED,
   LOGIN_LOADING,
   LOGIN_SUCCESS,
-  HANDLE_CHANGES
+  HANDLE_CHANGES,
+  LOGOUT_SUCESS
 } from '../types';
 
 const initialState = {
@@ -68,13 +69,20 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoginLoading: false,
-        isLogginSuccess: true
+        isLogginSuccess: true,
+        loginEmail: '',
+        loginPassword: ''
       };
     case LOGIN_FAILED:
       return {
         ...state,
         isLoginLoading: false,
         isLoginFailed: true
+      };
+    case LOGOUT_SUCESS:
+      return {
+        ...state,
+        isLogginSuccess: false
       };
     default:
       return state;
