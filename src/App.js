@@ -1,28 +1,48 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import SignupView from './view/SignupView';
+import Authorize from './components/Authorization/Authorize';
+import DashboardView from './view/DashboardView';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Navbar from './components/Navbar';
 
-class App extends Component {
+class App extends React.Component {
+  componentDidMount() {
+    console.log('hello: ', this.props.isLogginSuccess);
+  }
   render() {
+    console.log(this.props);
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <Navbar
+          isLogginSuccess={this.props.isLogginSuccess}
+          isRegisterSuccess={this.props.isRegisterSuccess}
+        />
+        <Route
+          exact
+          path='/'
+          render={props => (
+            <Authorization
+              {...props}
+              isLogginSuccess={this.props.isLogginSuccess}
+              isRegisterSuccess={this.props.isRegisterSuccess}
+            />
+          )}
+        />
+      </>
     );
   }
 }
 
-export default App;
+const Authorization = Authorize(DashboardView)(SignupView);
+
+const mapStateToProps = state => ({
+  isLogginSuccess: state.auth.isLogginSuccess,
+  isRegisterSuccess: state.auth.isRegisterSuccess
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(App);
