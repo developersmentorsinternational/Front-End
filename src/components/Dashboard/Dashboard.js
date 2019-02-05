@@ -135,7 +135,6 @@ class Dashboard extends React.Component {
     this.props.logout();
     this.setState({ powerOpen: false });
     localStorage.clear();
-    this.props.history.push('/signup');
   };
 
   render() {

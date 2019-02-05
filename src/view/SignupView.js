@@ -1,10 +1,11 @@
 import React from 'react';
 import SignupForm from '../components/Signup';
 import Navbar from '../components/Navbar';
+import { connect } from 'react-redux';
 
 const SignupView = props => {
   console.log('signup view rendering');
-  if (localStorage.getItem('data')) {
+  if (props.isRegisterSuccess || props.isLogginSuccess) {
     props.history.push('/dashboard');
   }
   return (
@@ -18,4 +19,12 @@ const SignupView = props => {
   );
 };
 
-export default SignupView;
+const mapStateToProps = state => ({
+  isRegisterSuccess: state.auth.isRegisterSuccess,
+  isLogginSuccess: state.auth.isLogginSuccess
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(SignupView);

@@ -43,7 +43,6 @@ function ButtonAppBar(props) {
   const handleLoginSubmit = e => {
     e.preventDefault();
     props.login(loginEmail, loginPassword);
-    props.history.push('/dashboard');
   };
 
   const { classes, loginEmail, loginPassword } = props;
