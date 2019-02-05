@@ -63,7 +63,7 @@ export const login = (email, password) => dispatch => {
   axios
     .post(`${baseURL}/login`, { email, password })
     .then(res => {
-      console.log(res.data.message);
+      console.log(res);
       localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: LOGIN_SUCCESS,

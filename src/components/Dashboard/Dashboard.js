@@ -189,7 +189,7 @@ class Dashboard extends React.Component {
                 <DialogTitle id='alert-dialog-title'>{'Log Out?'}</DialogTitle>
                 <DialogContent />
                 <DialogActions>
-                  <Button onClick={this.handlePowerClose} color='primary'>
+                  <Button  color='primary'>
                     Disagree
                   </Button>
                   <Button onClick={this.logout} color='secondary' autoFocus>
