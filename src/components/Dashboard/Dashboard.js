@@ -229,8 +229,12 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Route path='/dashboard/' component={HomePageView} />
-          <Route path='/dashboard/message' component={MessagePage} />
+          <Route exact path='/dashboard' component={HomePageView} />
+          <Route
+            path='/dashboard/message'
+            render={props => <MessagePage {...props} />}
+          />
+          <h2>hello lol</h2>
           <Route path='/dashboard/schedule' component={SchedulePage} />
           <div className={classes.tableContainer} />
         </main>
