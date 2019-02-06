@@ -9,6 +9,7 @@ const DashboardView = props => {
   return (
     <div>
       <Dashboard {...props} />
+      
     </div>
   );
 };
