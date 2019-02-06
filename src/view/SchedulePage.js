@@ -9,9 +9,9 @@ import { Route } from 'react-router-dom';
 const SchedulePage = () => {
   return (
     <div>
-      <ScheduledForm />
-      <ScheduledList />
-      <ScheduledCard />
+      <Route path='/dashboard/schedule/add-form' component={ScheduledForm} />
+      <Route Path='/dashboard/schedule/' component={ScheduledList} />
+      <Route path='/dashboard/schedule/:id' component={ScheduledCard} />
     </div>
   );
 };
