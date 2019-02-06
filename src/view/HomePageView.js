@@ -1,9 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Fab } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { MessageList } from '../components/Dashboard/MessageList';
 import { ScheduleList } from '../components/Dashboard/SchedulesList';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   root: {
@@ -32,6 +33,9 @@ const HomePageView = props => {
       <Typography variant='h5' component='h1'>
         Dashboard
       </Typography>
+      <Fab color='secondary' aria-label='Add' className={classes.fab}>
+        <AddIcon />
+      </Fab>
       <div className={classes.root}>
         <div className={classes.container}>
           <div className={classes.message}>
