@@ -1,5 +1,4 @@
 import { SEND_MESSAGE_LOADING, SEND_MESSAGE_SUCCESS } from '../types';
-
 const initialState = {
   messages: [
     { id: 1, subject: 'test', body: 'this is my first test', to: 'someone' },
@@ -35,3 +34,5 @@ const messagesReducer = (state = initialState, action) => {
 };
 
 export default messagesReducer;
+
+
