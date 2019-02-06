@@ -14,7 +14,8 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     maxWidth: '500px',
-    width: '100%'
+    width: '100%',
+    margin: '0 auto'
   },
   chip: {
     margin: theme.spacing.unit / 2
@@ -119,6 +120,11 @@ class MessageForm extends React.Component {
               Reset
             </Button>
           </form>
+          <h2>
+            Post request that will be sent out to mentors, individual, cohort or
+            by a certain group. add response back to message array of objects
+            and list them in the front page from the most recent. limit to 3-5
+          </h2>
         </Paper>
       </div>
     );
