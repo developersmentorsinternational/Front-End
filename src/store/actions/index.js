@@ -7,7 +7,9 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   HANDLE_CHANGES,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  SEND_MESSAGE_LOADING,
+  SEND_MESSAGE_SUCCESS
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -41,7 +43,6 @@ export const register = (
     })
     .then(res => {
       console.log(res);
-      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -64,7 +65,6 @@ export const login = (email, password) => dispatch => {
     .post(`${baseURL}/login`, { email, password })
     .then(res => {
       console.log(res);
-      localStorage.setItem('data', JSON.stringify(res.data));
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.message
@@ -88,4 +88,20 @@ export const logout = () => dispatch => {
       })
     )
     .catch(err => console.log(err));
+};
+
+// ---------------------------------------->
+// messages reducer
+// ---------------------------------------->
+
+export const sendMessage = message => dispatch => {
+  dispatch({
+    type: SEND_MESSAGE_LOADING
+  });
+  return axios.post(res => {
+    dispatch({
+      type: SEND_MESSAGE_SUCCESS,
+      payload: message
+    });
+  });
 };

@@ -20,15 +20,12 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import { logout } from '../../store/actions';
 
 import { Route, withRouter } from 'react-router-dom';
-import MessagePage from '../../view/MessagePage';
-import SchedulePage from '../../view/SchedulePage';
-import HomePageView from '../../view/HomePageView';
+import { MessageView, ScheduleView, HomePageView } from '../../view';
 
 const drawerWidth = 240;
 
@@ -189,9 +186,7 @@ class Dashboard extends React.Component {
                 <DialogTitle id='alert-dialog-title'>{'Log Out?'}</DialogTitle>
                 <DialogContent />
                 <DialogActions>
-                  <Button  color='primary'>
-                    Disagree
-                  </Button>
+                  <Button color='primary'>Disagree</Button>
                   <Button onClick={this.logout} color='secondary' autoFocus>
                     Agree
                   </Button>
@@ -225,10 +220,9 @@ class Dashboard extends React.Component {
           <Route exact path='/dashboard' component={HomePageView} />
           <Route
             path='/dashboard/message'
-            render={props => <MessagePage {...props} />}
+            render={props => <MessageView {...props} />}
           />
-          <h2>hello lol</h2>
-          <Route path='/dashboard/schedule' component={SchedulePage} />
+          <Route path='/dashboard/schedule' component={ScheduleView} />
           <div className={classes.tableContainer} />
         </main>
       </div>

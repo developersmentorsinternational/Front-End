@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 class App extends React.Component {
   componentDidMount() {
-    if (localStorage.getItem('data')) {
+    if (this.props.isLogginSuccess) {
       this.props.history.push('/dashboard');
     } else {
       this.props.history.push('/signup');
@@ -17,6 +17,7 @@ class App extends React.Component {
     return (
       <>
         <Route path='/dashboard' component={DashboardView} />
+        />
         <Route path='/signup' component={SignupView} />
       </>
     );
