@@ -57,7 +57,8 @@ const styles = theme => ({
   },
   phoneNumber: {
     marginLeft: '20px',
-    width: '281px'
+    width: '281px',
+    marginTop: '34px'
   }
 });
 
@@ -80,6 +81,7 @@ function SignupForm(props) {
       phoneNumber
     };
     props.register(email, firstName, lastName, password, phoneNumber);
+    alert('Success! You may now login');
   };
 
   const {
@@ -138,16 +140,285 @@ function SignupForm(props) {
             />
           </FormControl>
           <div className={classes.phone}>
-            <FormControl className={classes.formControl} disabled>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor='age-simple'>Country Code</InputLabel>
               <Select
-                value={countryCode}
                 onChange={handleChange}
+                value={countryCode}
                 input={<Input name='countryCode' id='name-disabled' />}
               >
-                <MenuItem value=''>
-                  <em>None</em>
+                <MenuItem value='1'>United States</MenuItem>
+                <MenuItem value='4'>Afghanistan</MenuItem>
+                <MenuItem value='248'>Åland Islands</MenuItem>
+                <MenuItem value='8'>Albania</MenuItem>
+                <MenuItem value='12'>Algeria</MenuItem>
+                <MenuItem value='16'>American Samoa</MenuItem>
+                <MenuItem value='20'>Andorra</MenuItem>
+                <MenuItem value='24'>Angola</MenuItem>
+                <MenuItem value='660'>Anguilla</MenuItem>
+                <MenuItem value='10'>Antarctica</MenuItem>
+                <MenuItem value='28'>Antigua and Barbuda</MenuItem>
+                <MenuItem value='32'>Argentina</MenuItem>
+                <MenuItem value='51'>Armenia</MenuItem>
+                <MenuItem value='533'>Aruba</MenuItem>
+                <MenuItem value='36'>Australia</MenuItem>
+                <MenuItem value='40'>Austria</MenuItem>
+                <MenuItem value='31'>Azerbaijan</MenuItem>
+                <MenuItem value='44'>Bahamas</MenuItem>
+                <MenuItem value='48'>Bahrain</MenuItem>
+                <MenuItem value='50'>Bangladesh</MenuItem>
+                <MenuItem value='52'>Barbados</MenuItem>
+                <MenuItem value='112'>Belarus</MenuItem>
+                <MenuItem value='56'>Belgium</MenuItem>
+                <MenuItem value='84'>Belize</MenuItem>
+                <MenuItem value='204'>Benin</MenuItem>
+                <MenuItem value='60'>Bermuda</MenuItem>
+                <MenuItem value='64'>Bhutan</MenuItem>
+                <MenuItem value='68'>Bolivia, Plurinational State of</MenuItem>
+                <MenuItem value='535'>
+                  Bonaire, Sint Eustatius and Saba
                 </MenuItem>
-                <MenuItem value='1'>+1</MenuItem>
+                <MenuItem value='70'>Bosnia and Herzegovina</MenuItem>
+                <MenuItem value='72'>Botswana</MenuItem>
+                <MenuItem value='74'>Bouvet Island</MenuItem>
+                <MenuItem value='76'>Brazil</MenuItem>
+                <MenuItem value='86'>British Indian Ocean Territory</MenuItem>
+                <MenuItem value='96'>Brunei Darussalam</MenuItem>
+                <MenuItem value='100'>Bulgaria</MenuItem>
+                <MenuItem value='854'>Burkina Faso</MenuItem>
+                <MenuItem value='108'>Burundi</MenuItem>
+                <MenuItem value='116'>Cambodia</MenuItem>
+                <MenuItem value='120'>Cameroon</MenuItem>
+                <MenuItem value='124'>Canada</MenuItem>
+                <MenuItem value='132'>Cape Verde</MenuItem>
+                <MenuItem value='136'>Cayman Islands</MenuItem>
+                <MenuItem value='140'>Central African Republic</MenuItem>
+                <MenuItem value='148'>Chad</MenuItem>
+                <MenuItem value='152'>Chile</MenuItem>
+                <MenuItem value='156'>China</MenuItem>
+                <MenuItem value='162'>Christmas Island</MenuItem>
+                <MenuItem value='166'>Cocos (Keeling) Islands</MenuItem>
+                <MenuItem value='170'>Colombia</MenuItem>
+                <MenuItem value='174'>Comoros</MenuItem>
+                <MenuItem value='178'>Congo</MenuItem>
+                <MenuItem value='180'>
+                  Congo, the Democratic Republic of the
+                </MenuItem>
+                <MenuItem value='184'>Cook Islands</MenuItem>
+                <MenuItem value='188'>Costa Rica</MenuItem>
+                <MenuItem value='384'>Côte d'Ivoire</MenuItem>
+                <MenuItem value='191'>Croatia</MenuItem>
+                <MenuItem value='192'>Cuba</MenuItem>
+                <MenuItem value='531'>Curaçao</MenuItem>
+                <MenuItem value='196'>Cyprus</MenuItem>
+                <MenuItem value='203'>Czech Republic</MenuItem>
+                <MenuItem value='208'>Denmark</MenuItem>
+                <MenuItem value='262'>Djibouti</MenuItem>
+                <MenuItem value='212'>Dominica</MenuItem>
+                <MenuItem value='214'>Dominican Republic</MenuItem>
+                <MenuItem value='218'>Ecuador</MenuItem>
+                <MenuItem value='818'>Egypt</MenuItem>
+                <MenuItem value='222'>El Salvador</MenuItem>
+                <MenuItem value='226'>Equatorial Guinea</MenuItem>
+                <MenuItem value='232'>Eritrea</MenuItem>
+                <MenuItem value='233'>Estonia</MenuItem>
+                <MenuItem value='231'>Ethiopia</MenuItem>
+                <MenuItem value='238'>Falkland Islands (Malvinas)</MenuItem>
+                <MenuItem value='234'>Faroe Islands</MenuItem>
+                <MenuItem value='242'>Fiji</MenuItem>
+                <MenuItem value='246'>Finland</MenuItem>
+                <MenuItem value='250'>France</MenuItem>
+                <MenuItem value='254'>French Guiana</MenuItem>
+                <MenuItem value='258'>French Polynesia</MenuItem>
+                <MenuItem value='260'>French Southern Territories</MenuItem>
+                <MenuItem value='266'>Gabon</MenuItem>
+                <MenuItem value='270'>Gambia</MenuItem>
+                <MenuItem value='268'>Georgia</MenuItem>
+                <MenuItem value='276'>Germany</MenuItem>
+                <MenuItem value='288'>Ghana</MenuItem>
+                <MenuItem value='292'>Gibraltar</MenuItem>
+                <MenuItem value='300'>Greece</MenuItem>
+                <MenuItem value='304'>Greenland</MenuItem>
+                <MenuItem value='308'>Grenada</MenuItem>
+                <MenuItem value='312'>Guadeloupe</MenuItem>
+                <MenuItem value='316'>Guam</MenuItem>
+                <MenuItem value='320'>Guatemala</MenuItem>
+                <MenuItem value='831'>Guernsey</MenuItem>
+                <MenuItem value='324'>Guinea</MenuItem>
+                <MenuItem value='624'>Guinea-Bissau</MenuItem>
+                <MenuItem value='328'>Guyana</MenuItem>
+                <MenuItem value='332'>Haiti</MenuItem>
+                <MenuItem value='334'>
+                  Heard Island and McDonald Islands
+                </MenuItem>
+                <MenuItem value='336'>Holy See (Vatican City State)</MenuItem>
+                <MenuItem value='340'>Honduras</MenuItem>
+                <MenuItem value='344'>Hong Kong</MenuItem>
+                <MenuItem value='348'>Hungary</MenuItem>
+                <MenuItem value='352'>Iceland</MenuItem>
+                <MenuItem value='356'>India</MenuItem>
+                <MenuItem value='360'>Indonesia</MenuItem>
+                <MenuItem value='364'>Iran, Islamic Republic of</MenuItem>
+                <MenuItem value='368'>Iraq</MenuItem>
+                <MenuItem value='372'>Ireland</MenuItem>
+                <MenuItem value='833'>Isle of Man</MenuItem>
+                <MenuItem value='376'>Israel</MenuItem>
+                <MenuItem value='380'>Italy</MenuItem>
+                <MenuItem value='388'>Jamaica</MenuItem>
+                <MenuItem value='392'>Japan</MenuItem>
+                <MenuItem value='832'>Jersey</MenuItem>
+                <MenuItem value='400'>Jordan</MenuItem>
+                <MenuItem value='398'>Kazakhstan</MenuItem>
+                <MenuItem value='404'>Kenya</MenuItem>
+                <MenuItem value='296'>Kiribati</MenuItem>
+                <MenuItem value='408'>
+                  Korea, Democratic People's Republic of
+                </MenuItem>
+                <MenuItem value='410'>Korea, Republic of</MenuItem>
+                <MenuItem value='414'>Kuwait</MenuItem>
+                <MenuItem value='417'>Kyrgyzstan</MenuItem>
+                <MenuItem value='418'>
+                  Lao People's Democratic Republic
+                </MenuItem>
+                <MenuItem value='428'>Latvia</MenuItem>
+                <MenuItem value='422'>Lebanon</MenuItem>
+                <MenuItem value='426'>Lesotho</MenuItem>
+                <MenuItem value='430'>Liberia</MenuItem>
+                <MenuItem value='434'>Libya</MenuItem>
+                <MenuItem value='438'>Liechtenstein</MenuItem>
+                <MenuItem value='440'>Lithuania</MenuItem>
+                <MenuItem value='442'>Luxembourg</MenuItem>
+                <MenuItem value='446'>Macao</MenuItem>
+                <MenuItem value='807'>
+                  Macedonia, the former Yugoslav Republic of
+                </MenuItem>
+                <MenuItem value='450'>Madagascar</MenuItem>
+                <MenuItem value='454'>Malawi</MenuItem>
+                <MenuItem value='458'>Malaysia</MenuItem>
+                <MenuItem value='462'>Maldives</MenuItem>
+                <MenuItem value='466'>Mali</MenuItem>
+                <MenuItem value='470'>Malta</MenuItem>
+                <MenuItem value='584'>Marshall Islands</MenuItem>
+                <MenuItem value='474'>Martinique</MenuItem>
+                <MenuItem value='478'>Mauritania</MenuItem>
+                <MenuItem value='480'>Mauritius</MenuItem>
+                <MenuItem value='175'>Mayotte</MenuItem>
+                <MenuItem value='484'>Mexico</MenuItem>
+                <MenuItem value='583'>Micronesia, Federated States of</MenuItem>
+                <MenuItem value='498'>Moldova, Republic of</MenuItem>
+                <MenuItem value='492'>Monaco</MenuItem>
+                <MenuItem value='496'>Mongolia</MenuItem>
+                <MenuItem value='499'>Montenegro</MenuItem>
+                <MenuItem value='500'>Montserrat</MenuItem>
+                <MenuItem value='504'>Morocco</MenuItem>
+                <MenuItem value='508'>Mozambique</MenuItem>
+                <MenuItem value='104'>Myanmar</MenuItem>
+                <MenuItem value='516'>Namibia</MenuItem>
+                <MenuItem value='520'>Nauru</MenuItem>
+                <MenuItem value='524'>Nepal</MenuItem>
+                <MenuItem value='528'>Netherlands</MenuItem>
+                <MenuItem value='540'>New Caledonia</MenuItem>
+                <MenuItem value='554'>New Zealand</MenuItem>
+                <MenuItem value='558'>Nicaragua</MenuItem>
+                <MenuItem value='562'>Niger</MenuItem>
+                <MenuItem value='566'>Nigeria</MenuItem>
+                <MenuItem value='570'>Niue</MenuItem>
+                <MenuItem value='574'>Norfolk Island</MenuItem>
+                <MenuItem value='580'>Northern Mariana Islands</MenuItem>
+                <MenuItem value='578'>Norway</MenuItem>
+                <MenuItem value='512'>Oman</MenuItem>
+                <MenuItem value='586'>Pakistan</MenuItem>
+                <MenuItem value='585'>Palau</MenuItem>
+                <MenuItem value='275'>Palestinian Territory, Occupied</MenuItem>
+                <MenuItem value='591'>Panama</MenuItem>
+                <MenuItem value='598'>Papua New Guinea</MenuItem>
+                <MenuItem value='600'>Paraguay</MenuItem>
+                <MenuItem value='604'>Peru</MenuItem>
+                <MenuItem value='608'>Philippines</MenuItem>
+                <MenuItem value='612'>Pitcairn</MenuItem>
+                <MenuItem value='616'>Poland</MenuItem>
+                <MenuItem value='620'>Portugal</MenuItem>
+                <MenuItem value='630'>Puerto Rico</MenuItem>
+                <MenuItem value='634'>Qatar</MenuItem>
+                <MenuItem value='638'>Réunion</MenuItem>
+                <MenuItem value='642'>Romania</MenuItem>
+                <MenuItem value='643'>Russian Federation</MenuItem>
+                <MenuItem value='646'>Rwanda</MenuItem>
+                <MenuItem value='652'>Saint Barthélemy</MenuItem>
+                <MenuItem value='654'>
+                  Saint Helena, Ascension and Tristan da Cunha
+                </MenuItem>
+                <MenuItem value='659'>Saint Kitts and Nevis</MenuItem>
+                <MenuItem value='662'>Saint Lucia</MenuItem>
+                <MenuItem value='663'>Saint Martin (French part)</MenuItem>
+                <MenuItem value='666'>Saint Pierre and Miquelon</MenuItem>
+                <MenuItem value='670'>
+                  Saint Vincent and the Grenadines
+                </MenuItem>
+                <MenuItem value='882'>Samoa</MenuItem>
+                <MenuItem value='674'>San Marino</MenuItem>
+                <MenuItem value='678'>Sao Tome and Principe</MenuItem>
+                <MenuItem value='682'>Saudi Arabia</MenuItem>
+                <MenuItem value='686'>Senegal</MenuItem>
+                <MenuItem value='688'>Serbia</MenuItem>
+                <MenuItem value='690'>Seychelles</MenuItem>
+                <MenuItem value='694'>Sierra Leone</MenuItem>
+                <MenuItem value='702'>Singapore</MenuItem>
+                <MenuItem value='534'>Sint Maarten (Dutch part)</MenuItem>
+                <MenuItem value='703'>Slovakia</MenuItem>
+                <MenuItem value='705'>Slovenia</MenuItem>
+                <MenuItem value='90'>Solomon Islands</MenuItem>
+                <MenuItem value='706'>Somalia</MenuItem>
+                <MenuItem value='710'>South Africa</MenuItem>
+                <MenuItem value='239'>
+                  South Georgia and the South Sandwich Islands
+                </MenuItem>
+                <MenuItem value='728'>South Sudan</MenuItem>
+                <MenuItem value='724'>Spain</MenuItem>
+                <MenuItem value='144'>Sri Lanka</MenuItem>
+                <MenuItem value='729'>Sudan</MenuItem>
+                <MenuItem value='740'>Suriname</MenuItem>
+                <MenuItem value='744'>Svalbard and Jan Mayen</MenuItem>
+                <MenuItem value='748'>Swaziland</MenuItem>
+                <MenuItem value='752'>Sweden</MenuItem>
+                <MenuItem value='756'>Switzerland</MenuItem>
+                <MenuItem value='760'>Syrian Arab Republic</MenuItem>
+                <MenuItem value='158'>Taiwan, Province of China</MenuItem>
+                <MenuItem value='762'>Tajikistan</MenuItem>
+                <MenuItem value='834'>Tanzania, United Republic of</MenuItem>
+                <MenuItem value='764'>Thailand</MenuItem>
+                <MenuItem value='626'>Timor-Leste</MenuItem>
+                <MenuItem value='768'>Togo</MenuItem>
+                <MenuItem value='772'>Tokelau</MenuItem>
+                <MenuItem value='776'>Tonga</MenuItem>
+                <MenuItem value='780'>Trinidad and Tobago</MenuItem>
+                <MenuItem value='788'>Tunisia</MenuItem>
+                <MenuItem value='792'>Turkey</MenuItem>
+                <MenuItem value='795'>Turkmenistan</MenuItem>
+                <MenuItem value='796'>Turks and Caicos Islands</MenuItem>
+                <MenuItem value='798'>Tuvalu</MenuItem>
+                <MenuItem value='800'>Uganda</MenuItem>
+                <MenuItem value='804'>Ukraine</MenuItem>
+                <MenuItem value='784'>United Arab Emirates</MenuItem>
+                <MenuItem value='826'>United Kingdom</MenuItem>
+                <MenuItem value='840'>United States</MenuItem>
+                <MenuItem value='581'>
+                  United States Minor Outlying Islands
+                </MenuItem>
+                <MenuItem value='858'>Uruguay</MenuItem>
+                <MenuItem value='860'>Uzbekistan</MenuItem>
+                <MenuItem value='548'>Vanuatu</MenuItem>
+                <MenuItem value='862'>
+                  Venezuela, Bolivarian Republic of
+                </MenuItem>
+                <MenuItem value='704'>Viet Nam</MenuItem>
+                <MenuItem value='92'>Virgin Islands, British</MenuItem>
+                <MenuItem value='850'>Virgin Islands, U.S.</MenuItem>
+                <MenuItem value='876'>Wallis and Futuna</MenuItem>
+                <MenuItem value='732'>Western Sahara</MenuItem>
+                <MenuItem value='887'>Yemen</MenuItem>
+                <MenuItem value='894'>Zambia</MenuItem>
+                <MenuItem value='716'>Zimbabwe</MenuItem>
               </Select>
             </FormControl>
             <FormControl
@@ -169,6 +440,17 @@ function SignupForm(props) {
               />
             </FormControl>
           </div>
+          <FormControl margin='normal' required fullWidth>
+            <InputLabel htmlFor='phone'> Region</InputLabel>
+            <Input
+              type='text'
+              id='region'
+              name='region'
+              autoComplete='region'
+              required
+              placeholder='North America'
+            />
+          </FormControl>
 
           <FormControl margin='normal' required fullWidth>
             <InputLabel htmlFor='password'>Password</InputLabel>

@@ -189,9 +189,7 @@ class Dashboard extends React.Component {
                 <DialogTitle id='alert-dialog-title'>{'Log Out?'}</DialogTitle>
                 <DialogContent />
                 <DialogActions>
-                  <Button  color='primary'>
-                    Disagree
-                  </Button>
+                  <Button color='primary'>Disagree</Button>
                   <Button onClick={this.logout} color='secondary' autoFocus>
                     Agree
                   </Button>
@@ -227,7 +225,6 @@ class Dashboard extends React.Component {
             path='/dashboard/message'
             render={props => <MessagePage {...props} />}
           />
-          <h2>hello lol</h2>
           <Route path='/dashboard/schedule' component={SchedulePage} />
           <div className={classes.tableContainer} />
         </main>

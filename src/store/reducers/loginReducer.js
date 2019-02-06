@@ -14,7 +14,7 @@ const initialState = {
   isRegisterLoading: false,
   isRegisterSuccess: false,
   isRegisterFailed: false,
-  isLogginSuccess: false,
+  isLogginSuccess: true,
   isLoginLoading: false,
   isLoginFailed: false,
   firstName: '',
@@ -67,7 +67,6 @@ const loginReducer = (state = initialState, action) => {
         isLoginLoading: true
       };
     case LOGIN_SUCCESS:
-      console.log(state.message);
       return {
         ...state,
         isLoginLoading: false,
@@ -85,7 +84,8 @@ const loginReducer = (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        isLogginSuccess: false
+        isLogginSuccess: false,
+        isRegisterSuccess: false
       };
     default:
       return state;
