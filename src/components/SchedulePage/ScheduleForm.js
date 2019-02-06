@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -20,9 +20,6 @@ const ScheduleForm = props => {
   const { classes } = props;
   return (
     <div>
-      <Typography variant='h5' component='h1'>
-        Add a Scheduled Message
-      </Typography>
       <Paper className={classes.root}>
         <h2>
           This is a typical crud app. Schedule List, every card is dynamically

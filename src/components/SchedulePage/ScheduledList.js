@@ -10,9 +10,6 @@ const styles = theme => ({
     maxWidth: '500px',
     width: '100%',
     margin: '0 auto'
-  },
-  chip: {
-    margin: theme.spacing.unit / 2
   }
 });
 
