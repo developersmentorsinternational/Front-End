@@ -1,6 +1,8 @@
 import React from 'react';
 import { Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import Schedule from './Schedule';
 
 const styles = theme => ({
   root: {
@@ -14,12 +16,18 @@ const styles = theme => ({
 });
 
 const ScheduledList = props => {
-  const { classes } = props;
+  const { classes, schedules } = props;
   return (
     <div>
-      <Paper className={classes.root}>testing</Paper>
+      {schedules.map(schedule => (
+        <Schedule schedule={schedule} key={schedule.id} />
+      ))}
     </div>
   );
 };
 
-export default withStyles(styles)(ScheduledList);
+const mapStateToProps = state => ({
+  schedules: state.schedules.schedule
+});
+
+export default withStyles(styles)(connect(mapStateToProps)(ScheduledList));

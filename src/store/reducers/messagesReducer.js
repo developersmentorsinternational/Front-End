@@ -1,7 +1,16 @@
 import { SEND_MESSAGE_LOADING, SEND_MESSAGE_SUCCESS } from '../types';
 
 const initialState = {
-  messages: [],
+  messages: [
+    { id: 1, subject: 'test', body: 'this is my first test', to: 'someone' },
+    {
+      id: 2,
+      subject: 'test',
+      body: 'this is my second test',
+      to: 'someone else'
+    },
+    { id: 3, subject: 'test', body: 'this is my third test', to: 'no one' }
+  ],
   sendMessageLoading: false,
   sendMessageSuccess: false
 };
