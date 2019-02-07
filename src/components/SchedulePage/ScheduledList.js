@@ -32,8 +32,8 @@ const ScheduledList = props => {
   }
   return (
     <div>
-      {schedules.map(schedule => (
-        <Schedule schedule={schedule} key={schedule.id} />
+      {schedules.map((schedule, i) => (
+        <Schedule schedule={schedule} key={i} />
       ))}
     </div>
   );

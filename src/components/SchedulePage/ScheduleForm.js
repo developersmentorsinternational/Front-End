@@ -12,8 +12,10 @@ import {
   FilledInput
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import TagFacesIcon from '@material-ui/icons/TagFaces';
 import { connect } from 'react-redux';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { TimePicker } from 'material-ui-pickers';
 
 const styles = theme => ({
   root: {
@@ -31,30 +33,27 @@ const styles = theme => ({
 
 class ScheduleForm extends React.Component {
   state = {
-    chipData: [
-      { key: 0, label: 'Angular' },
-      { key: 1, label: 'jQuery' },
-      { key: 2, label: 'Polymer' },
-      { key: 3, label: 'React' },
-      { key: 4, label: 'Vue.js' }
-    ]
+    selectedDate: new Date()
   };
 
-  handleDelete = data => () => {
-    if (data.label === 'React') {
-      alert('Why would you want to delete React?! :)'); // eslint-disable-line no-alert
-      return;
-    }
-
-    this.setState(state => {
-      const chipData = [...state.chipData];
-      const chipToDelete = chipData.indexOf(data);
-      chipData.splice(chipToDelete, 1);
-      return { chipData };
-    });
+  handleDateChange = date => {
+    this.setState({ selectedDate: date }, () =>
+      console.log(this.state.selectedDate)
+    );
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let date = `${this.state.selectedDate}`;
+    let newDate = date.match(/\d+(?=:)/gi);
+    const hour = newDate[0];
+    const minute = newDate[1];
+    console.log(hour, minute);
+  };
+
   render() {
     const { classes, event, group } = this.props;
+    const { selectedDate } = this.state;
     return (
       <div>
         <Paper className={classes.root}>
@@ -97,7 +96,12 @@ class ScheduleForm extends React.Component {
             <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
           </FormControl>
-          <form className={classes.container} noValidate autoComplete='off'>
+          <form
+            className={classes.container}
+            noValidate
+            autoComplete='off'
+            onSubmit={this.handleSubmit}
+          >
             <TextField
               id='outlined-multiline-static'
               label='Message'
@@ -108,18 +112,20 @@ class ScheduleForm extends React.Component {
               variant='outlined'
               fullWidth
               required
+              name='messageBody'
+              value={this.props.messageBody}
             />
-            <TextField
-              id='datetime-local'
-              label='Pick a date'
-              type='datetime-local'
-              defaultValue='2017-05-24T10:30'
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true
-              }}
-              required
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Typography>Pick a recurring date:</Typography>
+
+              <TimePicker
+                ampm={false}
+                seconds
+                format='HH:mm:ss'
+                value={selectedDate}
+                onChange={this.handleDateChange}
+              />
+            </MuiPickersUtilsProvider>
             <br />
             <Button
               type='submit'
@@ -145,7 +151,8 @@ class ScheduleForm extends React.Component {
 const mapStateToProps = state => ({
   group: state.schedules.group,
   event: state.schedules.event,
-  messageBody: state.schedules.messageBody
+  messageBody: state.schedules.messageBody,
+  dayOfTheWeek: state.schedules.date.dayOfTheWeek
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(ScheduleForm));
