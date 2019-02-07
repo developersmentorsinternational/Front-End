@@ -24,13 +24,16 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    maxWidth: '500px',
+    maxWidth: '700px',
     width: '100%',
     margin: '0 auto'
   },
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120
+  },
+  hello: {
+    
   }
 });
 
@@ -99,7 +102,7 @@ class ScheduleForm extends React.Component {
               onChange={this.props.handleBodyChange}
               input={<FilledInput name='event' id='filled-age-simple' />}
             >
-              <MenuItem value=''>
+              <MenuItem value='' className={classes.hello}>
                 <em>None</em>
               </MenuItem>
               {/* map through event array here to <MenuItem /> */}
