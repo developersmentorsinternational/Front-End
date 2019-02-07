@@ -17,8 +17,8 @@ class App extends React.Component {
     return (
       <>
         <Route path='/dashboard' component={DashboardView} />
-        />
         <Route path='/signup' component={SignupView} />
+        this is a test
       </>
     );
   }

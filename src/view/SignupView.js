@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 const SignupView = props => {
   if (props.isLogginSuccess) {
     props.history.push('/dashboard');
-  } else {
-    props.history.push('/');
   }
+  console.log('Signup!');
   return (
     <div>
       <Navbar
