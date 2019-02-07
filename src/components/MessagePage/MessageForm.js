@@ -22,8 +22,9 @@ const styles = theme => ({
     width: '100%',
     margin: '0 auto'
   },
-  chip: {
-    margin: theme.spacing.unit / 2
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
   }
 });
 

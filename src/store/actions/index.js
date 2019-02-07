@@ -10,7 +10,8 @@ import {
   LOGOUT_SUCCESS,
   SEND_MESSAGE_LOADING,
   SEND_MESSAGE_SUCCESS,
-  GET
+  GET,
+  HANDLE_SCHEDULE_CHANGE
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -117,4 +118,15 @@ export const getUsers = () => dispatch => {
       })
     )
     .catch(err => console.log(err));
+};
+
+export const handleScheduleChange = (name, value) => {
+  console.log(name, value);
+  return {
+    type: HANDLE_SCHEDULE_CHANGE,
+    payload: {
+      name,
+      value
+    }
+  };
 };

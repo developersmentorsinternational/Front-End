@@ -1,38 +1,25 @@
-import { HANDLE_CHANGES } from '../types';
+import { HANDLE_SCHEDULE_CHANGE } from '../types';
 
 const initialState = {
-  schedules: [
-    {
-      event: '',
-      group: '',
-      messageBody: 'hello',
-      date: {
-        minute: 5,
-        hour: 4,
-        dayOfTheMonth: '*',
-        month: '*',
-        dayOfTheWeek: '*'
-      }
-    }
-  ],
+  schedules: [],
   event: '',
   group: '',
   messageBody: 'hello',
   date: {
-    minute: 5,
-    hour: 4,
-    dayOfTheMonth: '*',
-    month: '*',
-    dayOfTheWeek: '*'
+    minute: '',
+    hour: '',
+    dayOfTheMonth: '',
+    month: '',
+    dayOfTheWeek: ''
   }
 };
 // cronjob https://crontab.guru/
 const schedulesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case HANDLE_CHANGES:
+    case HANDLE_SCHEDULE_CHANGE:
       return {
         ...state,
-        [action.payload.name]: action.payload.value
+        date: { ...state.date, [action.payload.name]: action.payload.value }
       };
     default:
       return state;
