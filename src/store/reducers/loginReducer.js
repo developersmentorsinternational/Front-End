@@ -14,7 +14,7 @@ const initialState = {
   isRegisterLoading: false,
   isRegisterSuccess: false,
   isRegisterFailed: false,
-  isLogginSuccess: false,
+  isLogginSuccess: true,
   isLoginLoading: false,
   isLoginFailed: false,
   firstName: '',

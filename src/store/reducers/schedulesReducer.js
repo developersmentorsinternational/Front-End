@@ -1,31 +1,39 @@
-const initialState = {
-  schedule: [
-    {
-      id: 1,
-      subject: 'test',
-      body: 'this is my first test',
-      to: 'someone',
-      date: 'today 1/30/29'
-    },
-    {
-      id: 2,
-      subject: 'test',
-      body: 'this is my second test',
-      to: 'someone else',
-      date: 'tommorw 1/30/29'
-    },
-    {
-      id: 3,
-      subject: 'test',
-      body: 'this is my third test',
-      to: 'no one',
-      date: 'sooooon 1/30/29'
-    }
-  ]
-};
+import { HANDLE_CHANGES } from '../types';
 
+const initialState = {
+  schedules: [
+    {
+      event: '',
+      group: '',
+      messageBody: 'hello',
+      date: {
+        minute: 5,
+        hour: 4,
+        dayOfTheMonth: '*',
+        month: '*',
+        dayOfTheWeek: '*'
+      }
+    }
+  ],
+  event: '',
+  group: '',
+  messageBody: 'hello',
+  date: {
+    minute: 5,
+    hour: 4,
+    dayOfTheMonth: '*',
+    month: '*',
+    dayOfTheWeek: '*'
+  }
+};
+// cronjob https://crontab.guru/
 const schedulesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case HANDLE_CHANGES:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      };
     default:
       return state;
   }

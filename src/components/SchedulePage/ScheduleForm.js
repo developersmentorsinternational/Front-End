@@ -5,10 +5,15 @@ import {
   Button,
   Icon,
   Typography,
-  Chip
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FilledInput
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import TagFacesIcon from '@material-ui/icons/TagFaces';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   root: {
@@ -49,56 +54,50 @@ class ScheduleForm extends React.Component {
     });
   };
   render() {
-    const { classes } = this.props;
+    const { classes, event, group } = this.props;
     return (
       <div>
         <Paper className={classes.root}>
-          <h2>
+          {/* <h2>
             This is a typical crud app. Schedule List, every card is dynamically
             routed, you can edit them individually based on id. Post Request ->
             response to the schedules array in the store and list in the
             homepage by what's coming in first.
-          </h2>
+          </h2> */}
           <Typography variant='h5' component='h3'>
             Who do you want to send it to?
           </Typography>
           <Typography component='p'>Select a contact:</Typography>
-          <TextField
-            id='standard-search'
-            label='Search field'
-            type='search'
-            className={classes.textField}
-            margin='normal'
-            required
-          />
-
-          {this.state.chipData.map(data => {
-            let icon = null;
-
-            if (data.label === 'React') {
-              icon = <TagFacesIcon />;
-            }
-
-            return (
-              <Chip
-                key={data.key}
-                icon={icon}
-                label={data.label}
-                onDelete={this.handleDelete(data)}
-                className={classes.chip}
-              />
-            );
-          })}
+          <FormControl variant='filled' className={classes.formControl}>
+            <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
+            <Select
+              value={event}
+              onChange={this.props.handleChange}
+              input={<FilledInput name='event' id='filled-age-simple' />}
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              {/* map through event array here to <MenuItem /> */}
+            </Select>
+          </FormControl>
+          <FormControl variant='filled' className={classes.formControl}>
+            <InputLabel htmlFor='filled-age-simple'>Group</InputLabel>
+            <Select
+              value={group}
+              onChange={this.props.handleChange}
+              input={<FilledInput name='group' id='filled-age-simple' />}
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              {/* map through group array here  */}
+              {/* <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem> */}
+            </Select>
+          </FormControl>
           <form className={classes.container} noValidate autoComplete='off'>
-            <TextField
-              required
-              id='outlined-required'
-              label='Subject'
-              className={classes.textField}
-              margin='normal'
-              variant='outlined'
-              fullWidth
-            />
             <TextField
               id='outlined-multiline-static'
               label='Message'
@@ -143,4 +142,10 @@ class ScheduleForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(ScheduleForm);
+const mapStateToProps = state => ({
+  group: state.schedules.group,
+  event: state.schedules.event,
+  messageBody: state.schedules.messageBody
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(ScheduleForm));

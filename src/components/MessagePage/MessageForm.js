@@ -5,8 +5,13 @@ import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import TagFacesIcon from '@material-ui/icons/TagFaces';
-import Chip from '@material-ui/core/Chip';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import FilledInput from '@material-ui/core/FilledInput';
+import { connect } from 'react-redux';
+import { handleChange } from '../../store/actions';
 
 const styles = theme => ({
   root: {
@@ -23,16 +28,6 @@ const styles = theme => ({
 });
 
 class MessageForm extends React.Component {
-  state = {
-    chipData: [
-      { key: 0, label: 'Angular' },
-      { key: 1, label: 'jQuery' },
-      { key: 2, label: 'Polymer' },
-      { key: 3, label: 'React' },
-      { key: 4, label: 'Vue.js' }
-    ]
-  };
-
   handleDelete = data => () => {
     if (data.label === 'React') {
       alert('Why would you want to delete React?! :)'); // eslint-disable-line no-alert
@@ -47,8 +42,12 @@ class MessageForm extends React.Component {
     });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, group, event, messageBody } = this.props;
     return (
       <div>
         <Typography variant='h5' component='h1'>
@@ -59,42 +58,42 @@ class MessageForm extends React.Component {
             Who do you want to send it to?
           </Typography>
           <Typography component='p'>Select a contact:</Typography>
-          <TextField
-            id='standard-search'
-            label='Search field'
-            type='search'
-            className={classes.textField}
-            margin='normal'
-            required
-          />
+          <FormControl variant='filled' className={classes.formControl}>
+            <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
+            <Select
+              value={event}
+              onChange={this.props.handleChange}
+              input={<FilledInput name='event' id='filled-age-simple' />}
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              {/* map through event array here to <MenuItem /> */}
+            </Select>
+          </FormControl>
+          <FormControl variant='filled' className={classes.formControl}>
+            <InputLabel htmlFor='filled-age-simple'>Group</InputLabel>
+            <Select
+              value={group}
+              onChange={this.props.handleChange}
+              input={<FilledInput name='group' id='filled-age-simple' />}
+            >
+              <MenuItem value=''>
+                <em>None</em>
+              </MenuItem>
+              {/* map through group array here  */}
+              {/* <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem> */}
+            </Select>
+          </FormControl>
 
-          {this.state.chipData.map(data => {
-            let icon = null;
-
-            if (data.label === 'React') {
-              icon = <TagFacesIcon />;
-            }
-
-            return (
-              <Chip
-                key={data.key}
-                icon={icon}
-                label={data.label}
-                onDelete={this.handleDelete(data)}
-                className={classes.chip}
-              />
-            );
-          })}
-          <form className={classes.container} noValidate autoComplete='off'>
-            <TextField
-              required
-              id='outlined-required'
-              label='Subject'
-              className={classes.textField}
-              margin='normal'
-              variant='outlined'
-              fullWidth
-            />
+          <form
+            className={classes.container}
+            noValidate
+            autoComplete='off'
+            onSubmit={this.handleSubmit}
+          >
             <TextField
               id='outlined-multiline-static'
               label='Message'
@@ -104,6 +103,9 @@ class MessageForm extends React.Component {
               margin='normal'
               variant='outlined'
               fullWidth
+              name='messageBody'
+              value={messageBody}
+              onChange={this.props.handleChange}
               required
             />
             <Button
@@ -120,15 +122,24 @@ class MessageForm extends React.Component {
               Reset
             </Button>
           </form>
-          <h2>
+          {/* <h2>
             Post request that will be sent out to mentors, individual, cohort or
             by a certain group. add response back to message array of objects
             and list them in the front page from the most recent. limit to 3-5
-          </h2>
+          </h2> */}
         </Paper>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(MessageForm);
+const mapStateToProps = state => ({
+  group: state.messages.group,
+  event: state.messages.event,
+  messageBody: state.messages.messageBody
+});
+
+export default connect(
+  mapStateToProps,
+  { handleChange }
+)(withStyles(styles)(MessageForm));

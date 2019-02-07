@@ -9,7 +9,8 @@ import {
   HANDLE_CHANGES,
   LOGOUT_SUCCESS,
   SEND_MESSAGE_LOADING,
-  SEND_MESSAGE_SUCCESS
+  SEND_MESSAGE_SUCCESS,
+  GET
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -104,4 +105,16 @@ export const sendMessage = message => dispatch => {
       payload: message
     });
   });
+};
+
+export const getUsers = () => dispatch => {
+  axios
+    .get(`${baseURL}/api/user`)
+    .then(res =>
+      dispatch({
+        type: GET,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
 };

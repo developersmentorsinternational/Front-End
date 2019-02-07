@@ -4,6 +4,7 @@ import SignupView from './view/SignupView';
 import DashboardView from './view/DashboardView';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getUsers } from './store/actions';
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,7 +19,6 @@ class App extends React.Component {
       <>
         <Route path='/dashboard' component={DashboardView} />
         <Route path='/signup' component={SignupView} />
-        this is a test
       </>
     );
   }
@@ -31,5 +31,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { getUsers }
 )(App);

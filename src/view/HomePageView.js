@@ -39,13 +39,13 @@ const HomePageView = props => {
       <div className={classes.root}>
         <div className={classes.container}>
           <div className={classes.message}>
-            {messages.map(message => (
-              <MessageList message={message} key={message.id} />
+            {messages.map((message, i) => (
+              <MessageList message={message} key={i} />
             ))}
           </div>
           <div className={classes.schedule}>
-            {schedules.map(schedule => (
-              <ScheduleList schedule={schedule} key={schedule.id} />
+            {schedules.map((schedule, i) => (
+              <ScheduleList schedule={schedule} key={i} />
             ))}
           </div>
         </div>
@@ -56,7 +56,7 @@ const HomePageView = props => {
 
 const mapStateToProps = state => ({
   messages: state.messages.messages,
-  schedules: state.schedules.schedule
+  schedules: state.schedules.schedules
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(HomePageView));

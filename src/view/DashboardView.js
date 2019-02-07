@@ -1,20 +1,28 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard/Dashboard';
 import { connect } from 'react-redux';
+import { getUsers } from '../store/actions';
 
-const DashboardView = props => {
-  if (!props.isLogginSuccess) {
-    props.history.push('/signup');
+class DashboardView extends React.Component {
+  componentDidMount() {
+    this.props.getUsers();
   }
-  return (
-    <div>
-      <Dashboard {...props} />
-      
-    </div>
-  );
-};
+  render() {
+    if (!this.props.isLogginSuccess) {
+      this.props.history.push('/signup');
+    }
+    return (
+      <div>
+        <Dashboard {...this.props} />
+      </div>
+    );
+  }
+}
 const mapStateToProps = state => ({
   isRegisterSuccess: state.auth.isRegisterSuccess,
   isLogginSuccess: state.auth.isLogginSuccess
 });
-export default connect(mapStateToProps)(DashboardView);
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(DashboardView);

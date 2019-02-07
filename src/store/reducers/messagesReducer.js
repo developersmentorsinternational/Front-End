@@ -1,21 +1,32 @@
-import { SEND_MESSAGE_LOADING, SEND_MESSAGE_SUCCESS } from '../types';
+import {
+  SEND_MESSAGE_LOADING,
+  SEND_MESSAGE_SUCCESS,
+  GET,
+  HANDLE_CHANGES
+} from '../types';
 const initialState = {
+  user: [],
   messages: [
-    { id: 1, subject: 'test', body: 'this is my first test', to: 'someone' },
     {
-      id: 2,
-      subject: 'test',
-      body: 'this is my second test',
-      to: 'someone else'
-    },
-    { id: 3, subject: 'test', body: 'this is my third test', to: 'no one' }
+      event: '1',
+      group: '1',
+      messageBody: '20'
+    }
   ],
+  event: '',
+  group: '',
+  messageBody: '',
   sendMessageLoading: false,
   sendMessageSuccess: false
 };
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case HANDLE_CHANGES:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      };
     case SEND_MESSAGE_LOADING:
       return {
         ...state,
@@ -28,11 +39,14 @@ const messagesReducer = (state = initialState, action) => {
         sendMessageLoading: false,
         sendMessageSuccess: true
       };
+    case GET:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }
 };
 
 export default messagesReducer;
-
-
