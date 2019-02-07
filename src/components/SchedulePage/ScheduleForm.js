@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { TimePicker } from 'material-ui-pickers';
-import { handleScheduleChange } from '../../store/actions';
+import { handleScheduleChange, handleBodyChange } from '../../store/actions';
 
 const styles = theme => ({
   root: {
@@ -37,8 +37,7 @@ const styles = theme => ({
 class ScheduleForm extends React.Component {
   state = {
     selectedDate: new Date(),
-    labelWidth: 0,
-    age: ''
+    labelWidth: 0
   };
 
   handleDateChange = date => {
@@ -46,16 +45,17 @@ class ScheduleForm extends React.Component {
       console.log(this.state.selectedDate)
     );
   };
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleBodyChange = e => {
+    this.props.handleBodyChange(e.target.name, e.target.value);
   };
+
   handleSubmit = e => {
     e.preventDefault();
     let date = `${this.state.selectedDate}`;
     let newDate = date.match(/\d+(?=:)/gi);
     const hour = newDate[0];
     const minute = newDate[1];
-    console.log(this.props);
+    console.log(hour, minute);
   };
 
   handleScheduleChange = e => {
@@ -75,7 +75,8 @@ class ScheduleForm extends React.Component {
       group,
       dayOfTheMonth,
       month,
-      dayOfTheWeek
+      dayOfTheWeek,
+      messageBody
     } = this.props;
     const { selectedDate } = this.state;
     return (
@@ -95,7 +96,7 @@ class ScheduleForm extends React.Component {
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
             <Select
               value={event}
-              onChange={this.props.handleChange}
+              onChange={this.props.handleBodyChange}
               input={<FilledInput name='event' id='filled-age-simple' />}
             >
               <MenuItem value=''>
@@ -108,7 +109,7 @@ class ScheduleForm extends React.Component {
             <InputLabel htmlFor='filled-age-simple'>Group</InputLabel>
             <Select
               value={group}
-              onChange={this.props.handleChange}
+              onChange={this.props.handleBodyChange}
               input={<FilledInput name='group' id='filled-age-simple' />}
             >
               <MenuItem value=''>
@@ -137,7 +138,8 @@ class ScheduleForm extends React.Component {
               fullWidth
               required
               name='messageBody'
-              value={this.props.messageBody}
+              value={messageBody}
+              onChange={this.handleBodyChange}
             />
             <div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -167,7 +169,6 @@ class ScheduleForm extends React.Component {
                     />
                   }
                 >
-                  
                   <MenuItem value='31'>31</MenuItem>
                   <MenuItem value='30'>30</MenuItem>
                   <MenuItem value='29'>29</MenuItem>
@@ -199,6 +200,68 @@ class ScheduleForm extends React.Component {
                   <MenuItem value='3'>03</MenuItem>
                   <MenuItem value='2'>02</MenuItem>
                   <MenuItem value='1'>01</MenuItem>
+                  <MenuItem value='*'>
+                    <em>None</em>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl variant='outlined' className={classes.formControl}>
+                <InputLabel htmlFor='outlined-age-simple'>Month</InputLabel>
+                <Select
+                  value={month}
+                  onChange={this.handleScheduleChange}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      name='month'
+                      id='outlined-age-simple'
+                    />
+                  }
+                >
+                  <MenuItem value='12'>December</MenuItem>
+                  <MenuItem value='11'>November</MenuItem>
+                  <MenuItem value='10'>October</MenuItem>
+                  <MenuItem value='9'>September</MenuItem>
+                  <MenuItem value='8'>August</MenuItem>
+                  <MenuItem value='7'>July</MenuItem>
+                  <MenuItem value='6'>June</MenuItem>
+                  <MenuItem value='5'>May</MenuItem>
+                  <MenuItem value='4'>April</MenuItem>
+                  <MenuItem value='3'>March</MenuItem>
+                  <MenuItem value='2'>February</MenuItem>
+
+                  <MenuItem value='1'>January</MenuItem>
+
+                  <MenuItem value='*'>
+                    <em>None</em>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl variant='outlined' className={classes.formControl}>
+                <InputLabel htmlFor='outlined-age-simple'>
+                  Day of the week
+                </InputLabel>
+                <Select
+                  value={dayOfTheWeek}
+                  onChange={this.handleScheduleChange}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      name='dayOfTheWeek'
+                      id='outlined-age-simple'
+                    />
+                  }
+                >
+                  <MenuItem value='6'>Saturday</MenuItem>
+                  <MenuItem value='5'>Friday</MenuItem>
+                  <MenuItem value='4'>Thursday</MenuItem>
+                  <MenuItem value='3'>Wednesday</MenuItem>
+                  <MenuItem value='2'>Tuesday</MenuItem>
+                  <MenuItem value='1'>Monday</MenuItem>
+                  <MenuItem value='0'>Sunday</MenuItem>
+
                   <MenuItem value='*'>
                     <em>None</em>
                   </MenuItem>
@@ -240,5 +303,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { handleScheduleChange }
+  { handleScheduleChange, handleBodyChange }
 )(withStyles(styles)(ScheduleForm));

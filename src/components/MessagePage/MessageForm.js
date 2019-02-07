@@ -11,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FilledInput from '@material-ui/core/FilledInput';
 import { connect } from 'react-redux';
-import { handleChange } from '../../store/actions';
+import { handleMessageChange } from '../../store/actions';
 
 const styles = theme => ({
   root: {
@@ -47,6 +47,9 @@ class MessageForm extends React.Component {
     e.preventDefault();
   };
 
+  handleMessageChange = e => {
+    this.props.handleMessageChange(e.target.name, e.target.value);
+  };
   render() {
     const { classes, group, event, messageBody } = this.props;
     return (
@@ -63,7 +66,7 @@ class MessageForm extends React.Component {
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
             <Select
               value={event}
-              onChange={this.props.handleChange}
+              onChange={this.props.handleMessageChange}
               input={<FilledInput name='event' id='filled-age-simple' />}
             >
               <MenuItem value=''>
@@ -76,7 +79,7 @@ class MessageForm extends React.Component {
             <InputLabel htmlFor='filled-age-simple'>Group</InputLabel>
             <Select
               value={group}
-              onChange={this.props.handleChange}
+              onChange={this.props.handleMessageChange}
               input={<FilledInput name='group' id='filled-age-simple' />}
             >
               <MenuItem value=''>
@@ -142,5 +145,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { handleChange }
+  { handleMessageChange }
 )(withStyles(styles)(MessageForm));

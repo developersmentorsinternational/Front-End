@@ -72,14 +72,7 @@ function SignupForm(props) {
     if (password !== confirmPassword) {
       return alert("Passwords don't match");
     }
-    const user = {
-      email,
-      firstName,
-      lastName,
-      password,
-      countryCode,
-      phoneNumber
-    };
+  
     props.register(email, firstName, lastName, password, phoneNumber);
     alert('Success! You may now login');
   };

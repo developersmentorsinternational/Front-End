@@ -1,5 +1,4 @@
 import React from 'react';
-import { Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Schedule from './Schedule';

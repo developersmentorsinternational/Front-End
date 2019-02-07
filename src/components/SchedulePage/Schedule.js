@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  Typography,
-  ExpansionPanelDetails,
-  Fab,
-  Icon
-} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
