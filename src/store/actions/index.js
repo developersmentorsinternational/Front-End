@@ -9,7 +9,27 @@ import {
   HANDLE_CHANGES,
   LOGOUT_SUCCESS,
   SEND_MESSAGE_LOADING,
-  SEND_MESSAGE_SUCCESS
+  SEND_MESSAGE_SUCCESS,
+  GET,
+  HANDLE_SCHEDULE_CHANGE,
+  HANDLE_BODY_CHANGE,
+  HANDLE_MESSAGE_CHANGES,
+  GET_MESSAGE_LOADING,
+  GET_MESSAGE_SUCCESS,
+  GET_MESSAGE_FAILED,
+  GET_SCHEDULE_LOADING,
+  GET_SCHEDULE_SUCCESS,
+  GET_MSCHEDULE_FAILED,
+  ADD_SCHEDULE_LOADING,
+  ADD_SCHEDULE_SUCCESS,
+  ADD_SCHEDULE_FAILED,
+  DELETE_SCHEDULE_LOADING,
+  DELETE_SCHEDULE_SUCCESS,
+  DELETE_SCHEDULE_FAILED,
+  POPULATE_SCHEDULE,
+  UPDATE_SCHEDULE_LOADING,
+  UPDATE_SCHEDULE_SUCCESS,
+  UPDATE_SCHEDULE_FAILED
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -105,3 +125,162 @@ export const sendMessage = message => dispatch => {
     });
   });
 };
+
+export const getMessage = () => dispatch => {
+  dispatch({
+    type: GET_MESSAGE_LOADING
+  });
+  return axios.get(`${baseURL}`).then(res => {
+    console.log(res);
+    dispatch({
+      type: GET_MESSAGE_SUCCESS,
+      payload: res.data
+    }).catch(err =>
+      dispatch({
+        type: GET_MESSAGE_FAILED,
+        payload: err
+      })
+    );
+  });
+};
+
+export const getUsers = () => dispatch => {
+  axios
+    .get(`${baseURL}/api/user`)
+    .then(res =>
+      dispatch({
+        type: GET,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+export const handleScheduleChange = (name, value) => {
+  console.log(name, value);
+  return {
+    type: HANDLE_SCHEDULE_CHANGE,
+    payload: {
+      name,
+      value
+    }
+  };
+};
+
+export const handleBodyChange = (name, value) => {
+  return {
+    type: HANDLE_BODY_CHANGE,
+    payload: {
+      name,
+      value
+    }
+  };
+};
+
+export const handleMessageChange = (name, value) => ({
+  type: HANDLE_MESSAGE_CHANGES,
+  payload: name,
+  value
+});
+
+//------------
+// schedule reducers
+//---------------
+
+export const getSchedule = () => dispatch => {
+  dispatch({
+    type: GET_SCHEDULE_LOADING
+  });
+  return axios.get(`${baseURL}`).then(res => {
+    console.log(res);
+    dispatch({
+      type: GET_SCHEDULE_SUCCESS,
+      payload: res.data
+    }).catch(err =>
+      dispatch({
+        type: GET_MSCHEDULE_FAILED,
+        payload: err
+      })
+    );
+  });
+};
+
+export const addSchedule = schedule => dispatch => {
+  dispatch({
+    type: ADD_SCHEDULE_LOADING
+  });
+  return axios
+    .post(`${baseURL}`, schedule)
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: ADD_SCHEDULE_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: ADD_SCHEDULE_FAILED,
+        payload: err
+      })
+    );
+};
+
+export const deleteSchedule = id => dispatch => {
+  dispatch({
+    type: DELETE_SCHEDULE_LOADING
+  });
+  return axios
+    .delete(`${baseURL}/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_SCHEDULE_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: DELETE_SCHEDULE_FAILED,
+        payload: err
+      })
+    );
+};
+
+export const populateSchedule = id => ({
+  type: POPULATE_SCHEDULE
+});
+
+export const updateSchedule = (beingUpdated, schedule) => dispatch => {
+  dispatch({
+    type: UPDATE_SCHEDULE_LOADING
+  });
+  return axios
+    .put(`${baseURL}/${beingUpdated}`, schedule)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: UPDATE_SCHEDULE_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: UPDATE_SCHEDULE_FAILED,
+        payload: err
+      })
+    );
+};
+/*
+object {
+  event: '',
+  group: '',
+  messageBody: '',
+  date: {
+    minute: '',
+    hour: '',
+    dayOfTheMonth: '',
+    month: '',
+    dayOfTheWeek: ''
+  },
+}
+*/
