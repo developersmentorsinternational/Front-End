@@ -52,9 +52,9 @@ export const register = user => dispatch => {
     type: REGISTER_LOADING
   });
   axios
-    .post(`${baseURL}/register`, {
+    .post(`${baseURL}/register`, 
       user
-    })
+    )
     .then(res => {
       console.log(res);
       axios.defaults.headers.common['Authorization'] = res.data.token;
