@@ -16,8 +16,8 @@ const ScheduleView = () => {
       </Typography>
       <TopContent />
       <Route path='/dashboard/schedule/add-form' component={ScheduledForm} />
-      <Route exact Path='/dashboard/schedule/home' component={ScheduledList} />
-      <Route path='/dashboard/schedule/:id' component={ScheduledCard} />
+      {/* <Route exact Path='/dashboard/schedule/home' component={ScheduledList} /> */}
+      {/* <Route path='/dashboard/schedule/:id' component={ScheduledCard} /> */}
     </div>
   );
 };

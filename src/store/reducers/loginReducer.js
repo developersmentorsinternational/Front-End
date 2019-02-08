@@ -6,11 +6,16 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   HANDLE_CHANGES,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  GET_REGIONS_LOADING,
+  GET_REGIONS_SUCCESS,
+  GET_REGIONS_FAILED
 } from '../types';
 
 const initialState = {
   user: {},
+  regions: [],
+
   isRegisterLoading: false,
   isRegisterSuccess: false,
   isRegisterFailed: false,
@@ -26,6 +31,7 @@ const initialState = {
   loginEmail: '',
   loginPassword: '',
   countryCode: '1',
+  region: '',
   message: '',
   error: ''
 };
@@ -73,7 +79,7 @@ const loginReducer = (state = initialState, action) => {
         isLogginSuccess: true,
         loginEmail: '',
         loginPassword: '',
-        message: action.payload
+        user: action.payload
       };
     case LOGIN_FAILED:
       return {
@@ -86,6 +92,23 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLogginSuccess: false,
         isRegisterSuccess: false
+      };
+    case GET_REGIONS_LOADING:
+      return {
+        ...state,
+        getRegionsLoading: true
+      };
+    case GET_REGIONS_SUCCESS:
+      return {
+        ...state,
+        regions: action.payload,
+        getRegionsLoading: false
+      };
+    case GET_REGIONS_FAILED:
+      return {
+        ...state,
+        etRegionsLoading: false,
+        error: action.payload
       };
     default:
       return state;

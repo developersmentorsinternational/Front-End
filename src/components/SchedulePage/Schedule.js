@@ -49,7 +49,7 @@ const styles = theme => ({
 });
 
 const Schedule = props => {
-  const { classes, schedule } = props;
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
@@ -68,7 +68,7 @@ const Schedule = props => {
 
         <ExpansionPanelDetails>
           <Typography className={classes.heading}>
-            To a group or something{' '}
+            To a group or something
           </Typography>
 
           <div className={classes.icons}>

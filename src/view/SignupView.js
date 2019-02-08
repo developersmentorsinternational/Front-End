@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { connect } from 'react-redux';
 
 const SignupView = props => {
-  if (props.isLogginSuccess) {
+  if (window.localStorage.token) {
     props.history.push('/dashboard');
   }
   console.log('Signup!');

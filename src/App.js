@@ -4,13 +4,15 @@ import SignupView from './view/SignupView';
 import DashboardView from './view/DashboardView';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUsers } from './store/actions';
+import { getUsers, getRegions } from './store/actions';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 class App extends React.Component {
   componentDidMount() {
-    if (this.props.isLogginSuccess) {
+    this.props.getRegions();
+
+    if (window.localStorage.token) {
       this.props.history.push('/dashboard');
     } else {
       this.props.history.push('/signup');
@@ -33,5 +35,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getUsers, getRegions }
 )(App);

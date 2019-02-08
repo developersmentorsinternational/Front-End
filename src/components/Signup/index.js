@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -79,8 +78,20 @@ function SignupForm(props) {
       return alert("Passwords don't match");
     }
 
-    props.register(email, firstName, lastName, password, phoneNumber);
-    alert("Success! You may now login");
+
+    const user = ({
+      email,
+      firstName,
+      lastName,
+      password,
+      countryCode,
+      phoneNumber,
+      region
+    });
+console.log(user)
+    props.register(user);
+    
+
   };
 
   const {
@@ -91,7 +102,9 @@ function SignupForm(props) {
     phoneNumber,
     countryCode,
     password,
-    confirmPassword
+    confirmPassword,
+    regions,
+    region
   } = props;
 
   console.log(props);
@@ -148,7 +161,9 @@ function SignupForm(props) {
               <Select
                 onChange={handleChange}
                 value={countryCode}
-                input={<Input name="countryCode" id="name-disabled" />}
+
+                input={<Input name='countryCode' />}
+
               >
                 <MenuItem value="1">United States</MenuItem>
                 <MenuItem value="4">Afghanistan</MenuItem>
@@ -443,16 +458,22 @@ function SignupForm(props) {
               />
             </FormControl>
           </div>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="phone"> Region</InputLabel>
-            <Input
-              type="text"
-              id="region"
-              name="region"
-              autoComplete="region"
-              required
-              placeholder="North America"
-            />
+
+
+          <FormControl className={classes.formControl} fullWidth>
+            <InputLabel htmlFor='age-simple'>Region</InputLabel>
+            <Select
+              onChange={handleChange}
+              value={region}
+              input={<Input name='region' id='name-disabled' />}
+            >
+              {regions.map(region => (
+                <MenuItem value={region.id} key={region.id}>
+                  {region.region}{' '}
+                </MenuItem>
+              ))}
+            </Select>
+
           </FormControl>
 
           <FormControl margin="normal" required fullWidth>
@@ -491,16 +512,7 @@ function SignupForm(props) {
   );
 }
 
-SignupForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  phoneNumber: PropTypes.string,
-  password: PropTypes.string,
-  confirmPassword: PropTypes.string,
-  countryCode: PropTypes.string
-};
+
 
 const mapStateToProps = state => ({
   firstName: state.auth.firstName,
@@ -511,7 +523,9 @@ const mapStateToProps = state => ({
   confirmPassword: state.auth.confirmPassword,
   loginEmail: state.auth.loginEmail,
   loginPassword: state.auth.loginPassword,
-  countryCode: state.auth.countryCode
+  countryCode: state.auth.countryCode,
+  regions: state.auth.regions,
+  region: state.auth.region
 });
 
 export default connect(
