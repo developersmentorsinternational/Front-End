@@ -197,7 +197,7 @@ class ScheduleForm extends React.Component {
               value={messageBody}
               onChange={this.handleBodyChange}
             />
-            {this.props.isUpdating ? (
+            {!this.props.isUpdating ? (
               <div>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Typography>Pick a recurring date:</Typography>

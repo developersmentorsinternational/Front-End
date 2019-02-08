@@ -43,6 +43,12 @@ import {
   SET_GROUP_EVENT_FAILED
 } from '../types';
 
+const config = {
+  headers: {
+    Authorization: localStorage.token
+  }
+};
+
 export const handleChange = (name, value) => ({
   type: HANDLE_CHANGES,
   payload: {
@@ -58,10 +64,9 @@ export const register = user => dispatch => {
     type: REGISTER_LOADING
   });
   axios
-    .post(`${baseURL}/register`, user)
+    .post(`${baseURL}/register`, user, config)
     .then(res => {
       console.log(res);
-      axios.defaults.headers.common['Authorization'] = res.data.token;
       localStorage.setItem('token', res.data.token);
       dispatch({
         type: REGISTER_SUCCESS,
@@ -82,7 +87,7 @@ export const login = (email, password) => dispatch => {
     type: LOGIN_LOADING
   });
   axios
-    .post(`${baseURL}/login`, { email, password })
+    .post(`${baseURL}/login`, { email, password }, config)
     .then(res => {
       console.log(res);
       axios.defaults.headers.common['Authorization'] = res.data.token;
@@ -102,7 +107,7 @@ export const login = (email, password) => dispatch => {
 
 export const logout = () => dispatch => {
   return axios
-    .get(`${baseURL}/api/logout`)
+    .get(`${baseURL}/api/logout`, config)
     .then(res => {
       localStorage.clear();
       dispatch({
@@ -122,7 +127,7 @@ export const getMessages = () => dispatch => {
     type: GET_MESSAGE_LOADING
   });
   axios
-    .get(`${baseURL}/api/get-messages`)
+    .get(`${baseURL}/api/get-messages`, config)
     .then(res =>
       dispatch({
         type: GET_MESSAGE_SUCCESS,
@@ -139,7 +144,7 @@ export const getMessages = () => dispatch => {
 
 export const getUsers = () => dispatch => {
   axios
-    .get(`${baseURL}/api/user`)
+    .get(`${baseURL}/api/user`, config)
     .then(res =>
       dispatch({
         type: GET_USERS_SUCCESS,
@@ -154,7 +159,7 @@ export const sendMessage = message => dispatch => {
     type: SEND_MESSAGE_LOADING
   });
   return axios
-    .post(`${baseURL}`, message)
+    .post(`${baseURL}`, message, config)
     .then(res => {
       console.log('%c CONSOLELOG', 'color: red', res);
       dispatch({
@@ -206,7 +211,7 @@ export const getSchedule = () => dispatch => {
   dispatch({
     type: GET_SCHEDULE_LOADING
   });
-  return axios.get(`${baseURL}`).then(res => {
+  return axios.get(`${baseURL}`, config).then(res => {
     console.log(res);
     dispatch({
       type: GET_SCHEDULE_SUCCESS,
@@ -225,7 +230,7 @@ export const addSchedule = schedule => dispatch => {
     type: ADD_SCHEDULE_LOADING
   });
   return axios
-    .post(`${baseURL}`, schedule)
+    .post(`${baseURL}`, schedule, config)
     .then(res => {
       console.log(res);
       dispatch({
@@ -246,7 +251,7 @@ export const deleteSchedule = id => dispatch => {
     type: DELETE_SCHEDULE_LOADING
   });
   return axios
-    .delete(`${baseURL}/${id}`)
+    .delete(`${baseURL}/${id}`, config)
     .then(res =>
       dispatch({
         type: DELETE_SCHEDULE_SUCCESS,
@@ -271,7 +276,7 @@ export const updateSchedule = (beingUpdated, schedule) => dispatch => {
     type: UPDATE_SCHEDULE_LOADING
   });
   return axios
-    .put(`${baseURL}/${beingUpdated}`, schedule)
+    .put(`${baseURL}/${beingUpdated}`, schedule, config)
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -294,7 +299,7 @@ export const getRegions = () => dispatch => {
     type: GET_REGIONS_LOADING
   });
   return axios
-    .get(`${baseURL}/regions`)
+    .get(`${baseURL}/regions`, config)
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -313,7 +318,7 @@ export const getRegions = () => dispatch => {
 
 export const getClients = () => dispatch => {
   axios
-    .get(`${baseURL}/api/get-clients`)
+    .get(`${baseURL}/api/get-clients`, config)
     .then(res =>
       dispatch({
         type: GET_CLIENTS_SUCCESS,
@@ -337,7 +342,7 @@ export const getEvents = () => dispatch => {
 
 export const getGroups = () => dispatch => {
   axios
-    .get(`${baseURL}/api/get-groups `)
+    .get(`${baseURL}/api/get-groups `, config)
     .then(res =>
       dispatch({
         type: GET_GROUPS_SUCCESS,
@@ -353,7 +358,11 @@ export const setGroupEvent = (event, group, body) => dispatch => {
   });
   console.log(event, group, body);
   axios
-    .post(`${baseURL}/api/set-group-event-remind`, { event, group, body })
+    .post(
+      `${baseURL}/api/set-group-event-remind`,
+      { event, group, body },
+      config
+    )
     .then(res =>
       dispatch({
         type: SET_GROUP_EVENT,
