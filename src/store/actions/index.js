@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   REGISTER_FAILED,
   REGISTER_LOADING,
@@ -10,7 +11,7 @@ import {
   LOGOUT_SUCCESS,
   SEND_MESSAGE_LOADING,
   SEND_MESSAGE_SUCCESS,
-  GET,
+  GET_USERS_SUCCESS,
   HANDLE_SCHEDULE_CHANGE,
   HANDLE_BODY_CHANGE,
   HANDLE_MESSAGE_CHANGES,
@@ -29,7 +30,11 @@ import {
   POPULATE_SCHEDULE,
   UPDATE_SCHEDULE_LOADING,
   UPDATE_SCHEDULE_SUCCESS,
-  UPDATE_SCHEDULE_FAILED
+  UPDATE_SCHEDULE_FAILED,
+  SEND_MESSAGE_FAILED,
+  GET_REGIONS_LOADING,
+  GET_REGIONS_SUCCESS,
+  GET_REGIONS_FAILED
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -42,27 +47,18 @@ export const handleChange = (name, value) => ({
 
 const baseURL = 'https://mentors-international.herokuapp.com';
 
-export const register = (
-  email,
-  firstName,
-  lastName,
-  password,
-  phoneNumber
-) => dispatch => {
+export const register = user => dispatch => {
   dispatch({
     type: REGISTER_LOADING
   });
-  return axios
+  axios
     .post(`${baseURL}/register`, {
-      email,
-      firstName,
-      lastName,
-      password,
-      countryCode: '1',
-      phoneNumber
+      user
     })
     .then(res => {
       console.log(res);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
+      localStorage.setItem('token', res.data.token);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -85,9 +81,11 @@ export const login = (email, password) => dispatch => {
     .post(`${baseURL}/login`, { email, password })
     .then(res => {
       console.log(res);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
+      localStorage.setItem('token', res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data.message
+        payload: res.data
       });
     })
     .catch(err =>
@@ -114,18 +112,6 @@ export const logout = () => dispatch => {
 // messages reducer
 // ---------------------------------------->
 
-export const sendMessage = message => dispatch => {
-  dispatch({
-    type: SEND_MESSAGE_LOADING
-  });
-  return axios.post(res => {
-    dispatch({
-      type: SEND_MESSAGE_SUCCESS,
-      payload: message
-    });
-  });
-};
-
 export const getMessage = () => dispatch => {
   dispatch({
     type: GET_MESSAGE_LOADING
@@ -144,12 +130,32 @@ export const getMessage = () => dispatch => {
   });
 };
 
+export const sendMessage = message => dispatch => {
+  dispatch({
+    type: SEND_MESSAGE_LOADING
+  });
+  return axios
+    .post(`${baseURL}`, message)
+    .then(res => {
+      dispatch({
+        type: SEND_MESSAGE_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: SEND_MESSAGE_FAILED,
+        payload: err
+      })
+    );
+};
+
 export const getUsers = () => dispatch => {
   axios
     .get(`${baseURL}/api/user`)
     .then(res =>
       dispatch({
-        type: GET,
+        type: GET_USERS_SUCCESS,
         payload: res.data
       })
     )
@@ -247,7 +253,8 @@ export const deleteSchedule = id => dispatch => {
 };
 
 export const populateSchedule = id => ({
-  type: POPULATE_SCHEDULE
+  type: POPULATE_SCHEDULE,
+  payload: { id }
 });
 
 export const updateSchedule = (beingUpdated, schedule) => dispatch => {
@@ -270,17 +277,25 @@ export const updateSchedule = (beingUpdated, schedule) => dispatch => {
       })
     );
 };
-/*
-object {
-  event: '',
-  group: '',
-  messageBody: '',
-  date: {
-    minute: '',
-    hour: '',
-    dayOfTheMonth: '',
-    month: '',
-    dayOfTheWeek: ''
-  },
-}
-*/
+
+export const getRegions = () => dispatch => {
+  dispatch({
+    type: GET_REGIONS_LOADING
+  });
+  return axios
+    .get(`${baseURL}/regions`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: GET_REGIONS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_REGIONS_FAILED,
+        payload: err
+      });
+    });
+};
