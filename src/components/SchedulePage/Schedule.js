@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   ExpansionPanel,
@@ -10,6 +11,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DeleteIcon from "@material-ui/icons/Delete";
+
 
 const styles = theme => ({
   root: {
@@ -50,6 +52,7 @@ const styles = theme => ({
 
 const Schedule = props => {
   const { classes, schedule } = props;
+
   return (
     <div className={classes.root}>
       <ExpansionPanel className={classes.expansionPanel}>
@@ -59,19 +62,19 @@ const Schedule = props => {
         >
           <div className={classes.topContent}>
             <Typography className={classes.heading}>
-              {schedule.subject}
+              schedule dot subject
             </Typography>
             <Typography className={classes.heading2}>
-              {schedule.date}
+             schedule date
             </Typography>
           </div>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <Typography className={classes.heading}>{schedule.to}</Typography>
+          <Typography className={classes.heading}>To a group or something/Typography>
 
           <div className={classes.icons}>
-            <Typography className={classes.text}>{schedule.body}</Typography>
+            <Typography className={classes.text}>body message</Typography>
 
             <div>
               <Fab
@@ -97,6 +100,7 @@ const Schedule = props => {
       </ExpansionPanel>
     </div>
   );
+
 };
 
 export default withStyles(styles)(Schedule);

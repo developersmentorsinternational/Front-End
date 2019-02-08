@@ -4,6 +4,9 @@ import SignupView from './view/SignupView';
 import DashboardView from './view/DashboardView';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getUsers } from './store/actions';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,11 +18,10 @@ class App extends React.Component {
   }
   render() {
     return (
-      <>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Route path='/dashboard' component={DashboardView} />
-        />
         <Route path='/signup' component={SignupView} />
-      </>
+      </MuiPickersUtilsProvider>
     );
   }
 }
@@ -31,5 +33,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { getUsers }
 )(App);
