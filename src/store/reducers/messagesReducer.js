@@ -1,12 +1,12 @@
 import {
   SEND_MESSAGE_LOADING,
   SEND_MESSAGE_SUCCESS,
-  GET,
+  GET_USERS_SUCCESS,
   HANDLE_MESSAGE_CHANGES,
   GET_MESSAGE_LOADING,
   GET_MESSAGE_SUCCESS,
   GET_MESSAGE_FAILED,
- 
+  SEND_MESSAGE_FAILED
 } from '../types';
 const initialState = {
   user: [],
@@ -46,6 +46,11 @@ const messagesReducer = (state = initialState, action) => {
         sendMessageLoading: false,
         sendMessageSuccess: true
       };
+    case SEND_MESSAGE_FAILED:
+      return {
+        ...state,
+        error: action.payload
+      };
     case GET_MESSAGE_LOADING:
       return {
         ...state,
@@ -63,8 +68,8 @@ const messagesReducer = (state = initialState, action) => {
         getMessageLoading: false,
         error: action.payload
       };
-      
-    case GET:
+
+    case GET_USERS_SUCCESS:
       return {
         ...state,
         user: action.payload
