@@ -89,7 +89,8 @@ class MessageForm extends React.Component {
               <MenuItem value='' className={classes.hello}>
                 <em>None</em>
               </MenuItem>
-              {this.props.events.length === 0
+              {/* changed the boolean to false for now since I don't think this component will ever be in use */}
+              {!this.props.events.length === 0
                 ? null
                 : this.props.events.map(event => (
                     <MenuItem value={event.id} key={event.id}>

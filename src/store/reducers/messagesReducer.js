@@ -9,7 +9,9 @@ import {
   SEND_MESSAGE_FAILED,
   GET_CLIENTS_SUCCESS,
   GET_EVENTS_SUCCESS,
-  GET_GROUPS_SUCCESS
+  GET_GROUPS_SUCCESS,
+  SET_GROUP_EVENT_LOADING,
+  SET_GROUP_EVENT_FAILED
 } from '../types';
 const initialState = {
   user: [],
@@ -23,7 +25,8 @@ const initialState = {
   deleteScheduleLoading: false,
   error: '',
   clients: [],
-  events: []
+  events: [],
+  isLoading: false
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -86,8 +89,20 @@ const messagesReducer = (state = initialState, action) => {
     case GET_GROUPS_SUCCESS:
       return {
         ...state,
-        group: action.payload
+        group: action.payload,
+        isLoading: false
       };
+      case SET_GROUP_EVENT_LOADING: 
+      return {
+        ...state,
+        isLoading: true
+      }
+      case SET_GROUP_EVENT_FAILED:
+      return {
+        ...state, 
+        isLoading: false,
+        error: action.payload
+      }
     default:
       return state;
   }

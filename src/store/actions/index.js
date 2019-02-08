@@ -38,7 +38,9 @@ import {
   GET_CLIENTS_SUCCESS,
   GET_EVENTS_SUCCESS,
   GET_GROUPS_SUCCESS,
-  SET_GROUP_EVENT
+  SET_GROUP_EVENT,
+  SET_GROUP_EVENT_LOADING,
+  SET_GROUP_EVENT_FAILED
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -344,6 +346,9 @@ export const getGroups = () => dispatch => {
 };
 
 export const setGroupEvent = (event, group, body) => dispatch => {
+  dispatch({
+    type:SET_GROUP_EVENT_LOADING
+  })
   console.log(event, group, body);
   axios
     .post(`${baseURL}/api/set-group-event`, { event, group, body })
@@ -353,5 +358,8 @@ export const setGroupEvent = (event, group, body) => dispatch => {
         payload: res.data
       })
     )
-    .catch(err => console.log(err));
+    .catch(err => dispatch({
+      type:SET_GROUP_EVENT_FAILED,
+      payload: err.data
+    }));
 };

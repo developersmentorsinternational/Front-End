@@ -20,7 +20,7 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'spaceAround'
+    justifyContent: 'spaceBetween'
   },
   message: {
     borderRight: '1px solid black'
