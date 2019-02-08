@@ -8,7 +8,7 @@ class DashboardView extends React.Component {
     this.props.getUsers();
   }
   render() {
-    if (!this.props.isLogginSuccess) {
+    if (!localStorage.token) {
       this.props.history.push('/signup');
     }
     return (

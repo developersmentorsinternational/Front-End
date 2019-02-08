@@ -68,7 +68,7 @@ const Schedule = props => {
 
         <ExpansionPanelDetails>
           <Typography className={classes.heading}>
-            To a group or something{' '}
+            To a group or something
           </Typography>
 
           <div className={classes.icons}>
