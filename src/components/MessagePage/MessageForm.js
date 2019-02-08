@@ -26,7 +26,8 @@ const styles = theme => ({
   },
 
   reset: {
-    backgroundColor: "white"
+    backgroundColor: "white",
+    marginLeft: "10px"
   }
 });
 
@@ -135,11 +136,6 @@ class MessageForm extends React.Component {
               Reset
             </Button>
           </form>
-          <h2>
-            Post request that will be sent out to mentors, individual, cohort or
-            by a certain group. add response back to message array of objects
-            and list them in the front page from the most recent. limit to 3-5
-          </h2>
         </Paper>
       </div>
     );
