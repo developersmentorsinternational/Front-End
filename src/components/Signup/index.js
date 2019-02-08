@@ -15,6 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import { connect } from "react-redux";
 import { handleChange, register } from "../../store/actions";
+import "./style.css";
 
 const styles = theme => ({
   main: {
@@ -28,7 +29,6 @@ const styles = theme => ({
       marginRight: "auto"
     },
     paper: {
-      border: "3px dashed red",
       marginTop: theme.spacing.unit * 8,
       display: "flex",
       flexDirection: "column",
@@ -42,8 +42,7 @@ const styles = theme => ({
     },
     form: {
       width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing.unit,
-      border: "3px dashed red"
+      marginTop: theme.spacing.unit
     },
     submit: {
       marginTop: theme.spacing.unit * 3
@@ -54,12 +53,17 @@ const styles = theme => ({
       alignItems: "center"
     },
     formControl: {
-      marginTop: "24px"
+      marginTop: "24px",
+      border: "3px dashed red"
     },
     phoneNumber: {
       marginLeft: "20px",
       width: "281px",
-      marginTop: "34px"
+      marginTop: "34px",
+      border: "3px dashed red"
+    },
+    test: {
+      border: "1px solid red"
     }
   }
 });
@@ -137,6 +141,7 @@ function SignupForm(props) {
               onChange={handleChange}
             />
           </FormControl>
+
           <div className={classes.phone}>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-simple">Country Code</InputLabel>
