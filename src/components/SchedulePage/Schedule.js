@@ -1,5 +1,4 @@
-
-import React from "react";
+import React from 'react';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -7,46 +6,45 @@ import {
   ExpansionPanelDetails,
   Fab,
   Icon
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import DeleteIcon from "@material-ui/icons/Delete";
-
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
-    maxWidth: "800px",
-    paddingBottom: "5px",
-    width: "100%",
-    margin: "0 auto"
+    maxWidth: '800px',
+    paddingBottom: '5px',
+    width: '100%',
+    margin: '0 auto'
   },
   topContent: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    width: "100%"
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '100%'
   },
   heading: {
-    fontWeight: "800",
-    paddingLeft: "5px",
-    width: "125px"
+    fontWeight: '800',
+    paddingLeft: '5px',
+    width: '125px'
   },
 
   fab: {
-    backgroundColor: "#4f5b62"
+    backgroundColor: '#4f5b62'
   },
 
   icons: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "80%",
-    marginLeft: "10px"
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginLeft: '10px'
   },
 
   expansionPanel: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
@@ -64,33 +62,33 @@ const Schedule = props => {
             <Typography className={classes.heading}>
               schedule dot subject
             </Typography>
-            <Typography className={classes.heading2}>
-             schedule date
-            </Typography>
+            <Typography className={classes.heading2}>schedule date</Typography>
           </div>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <Typography className={classes.heading}>To a group or something/Typography>
+          <Typography className={classes.heading}>
+            To a group or something
+          </Typography>
 
           <div className={classes.icons}>
             <Typography className={classes.text}>body message</Typography>
 
             <div>
               <Fab
-                color="secondary"
-                aria-label="Edit"
+                color='secondary'
+                aria-label='Edit'
                 className={classes.fab}
-                size="small"
+                size='small'
               >
                 <Icon>edit_icon</Icon>
               </Fab>
 
               <Fab
                 disabled
-                aria-label="Delete"
+                aria-label='Delete'
                 className={classes.fab}
-                size="small"
+                size='small'
               >
                 <DeleteIcon />
               </Fab>
@@ -100,7 +98,6 @@ const Schedule = props => {
       </ExpansionPanel>
     </div>
   );
-
 };
 
 export default withStyles(styles)(Schedule);

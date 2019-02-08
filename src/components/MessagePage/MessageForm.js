@@ -66,18 +66,7 @@ class MessageForm extends React.Component {
 
 
   
-
-          <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              required
-              id="outlined-required"
-              label="Subject"
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-              fullWidth
-            />
-
+           
           <Typography component='p'>Select a contact:</Typography>
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
@@ -115,6 +104,17 @@ class MessageForm extends React.Component {
             autoComplete='off'
             onSubmit={this.handleSubmit}
           >
+
+<TextField
+              required
+              id="outlined-required"
+              label="Subject"
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
+
 
             <TextField
               id="outlined-multiline-static"
