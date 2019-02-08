@@ -19,9 +19,9 @@ const MessageList = props => {
     <div>
       <Paper className={classes.root} elevation={1}>
         <Typography variant='h5' component='h3'>
-          {message.created}
+          {message.name}
         </Typography>
-        <Typography component='p'>{message.name}</Typography>
+        <Typography component='p'>{message.created}</Typography>
       </Paper>
     </div>
   );
