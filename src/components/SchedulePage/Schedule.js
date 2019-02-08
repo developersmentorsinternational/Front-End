@@ -32,7 +32,7 @@ const styles = theme => ({
   },
 
   fab: {
-    backgroundColor: '#4f5b62'
+    backgroundColor: '#4f5b62',
   },
 
   icons: {
