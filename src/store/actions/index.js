@@ -34,7 +34,11 @@ import {
   SEND_MESSAGE_FAILED,
   GET_REGIONS_LOADING,
   GET_REGIONS_SUCCESS,
-  GET_REGIONS_FAILED
+  GET_REGIONS_FAILED,
+  GET_CLIENTS_SUCCESS,
+  GET_EVENTS_SUCCESS,
+  GET_GROUPS_SUCCESS,
+  SET_GROUP_EVENT
 } from '../types';
 
 export const handleChange = (name, value) => ({
@@ -52,9 +56,7 @@ export const register = user => dispatch => {
     type: REGISTER_LOADING
   });
   axios
-    .post(`${baseURL}/register`, 
-      user
-    )
+    .post(`${baseURL}/register`, user)
     .then(res => {
       console.log(res);
       axios.defaults.headers.common['Authorization'] = res.data.token;
@@ -99,12 +101,13 @@ export const login = (email, password) => dispatch => {
 export const logout = () => dispatch => {
   return axios
     .get(`${baseURL}/api/logout`)
-    .then(res =>
+    .then(res => {
+      localStorage.clear();
       dispatch({
         type: LOGOUT_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err => console.log(err));
 };
 
@@ -112,39 +115,21 @@ export const logout = () => dispatch => {
 // messages reducer
 // ---------------------------------------->
 
-export const getMessage = () => dispatch => {
+export const getMessages = () => dispatch => {
   dispatch({
     type: GET_MESSAGE_LOADING
   });
-  return axios.get(`${baseURL}`).then(res => {
-    console.log(res);
-    dispatch({
-      type: GET_MESSAGE_SUCCESS,
-      payload: res.data
-    }).catch(err =>
+  axios
+    .get(`${baseURL}/api/get-messages`)
+    .then(res =>
       dispatch({
-        type: GET_MESSAGE_FAILED,
-        payload: err
-      })
-    );
-  });
-};
-
-export const sendMessage = message => dispatch => {
-  dispatch({
-    type: SEND_MESSAGE_LOADING
-  });
-  return axios
-    .post(`${baseURL}`, message)
-    .then(res => {
-      dispatch({
-        type: SEND_MESSAGE_SUCCESS,
+        type: GET_MESSAGE_SUCCESS,
         payload: res.data
-      });
-    })
+      })
+    )
     .catch(err =>
       dispatch({
-        type: SEND_MESSAGE_FAILED,
+        type: GET_MESSAGE_FAILED,
         payload: err
       })
     );
@@ -162,6 +147,27 @@ export const getUsers = () => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const sendMessage = message => dispatch => {
+  dispatch({
+    type: SEND_MESSAGE_LOADING
+  });
+  return axios
+    .post(`${baseURL}`, message)
+    .then(res => {
+      console.log('%c CONSOLELOG', 'color: red', res);
+      dispatch({
+        type: SEND_MESSAGE_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: SEND_MESSAGE_FAILED,
+        payload: err
+      })
+    );
+};
+
 export const handleScheduleChange = (name, value) => {
   console.log(name, value);
   return {
@@ -174,6 +180,7 @@ export const handleScheduleChange = (name, value) => {
 };
 
 export const handleBodyChange = (name, value) => {
+  console.log(name, value);
   return {
     type: HANDLE_BODY_CHANGE,
     payload: {
@@ -298,4 +305,53 @@ export const getRegions = () => dispatch => {
         payload: err
       });
     });
+};
+
+export const getClients = () => dispatch => {
+  axios
+    .get(`${baseURL}/api/get-clients`)
+    .then(res =>
+      dispatch({
+        type: GET_CLIENTS_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+export const getEvents = () => dispatch => {
+  axios
+    .get(`${baseURL}/api/get-events`)
+    .then(res =>
+      dispatch({
+        type: GET_EVENTS_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+export const getGroups = () => dispatch => {
+  axios
+    .get(`${baseURL}/api/get-groups `)
+    .then(res =>
+      dispatch({
+        type: GET_GROUPS_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+export const setGroupEvent = (event, group, body) => dispatch => {
+  console.log(event, group, body);
+  axios
+    .post(`${baseURL}/api/set-group-event`, { event, group, body })
+    .then(res =>
+      dispatch({
+        type: SET_GROUP_EVENT,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
 };

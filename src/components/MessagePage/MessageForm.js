@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -14,36 +13,31 @@ import FilledInput from '@material-ui/core/FilledInput';
 import { connect } from 'react-redux';
 import { handleMessageChange } from '../../store/actions';
 
-
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
 
-    maxWidth: "1000px",
-    width: "100%",
-    margin: "0 auto"
+    maxWidth: '1000px',
+    width: '100%',
+    margin: '0 auto'
   },
   chip: {
     margin: theme.spacing.unit / 2
   },
 
   button: {
-    backgroundColor: "#00AFC1"
+    backgroundColor: '#00AFC1'
   },
 
   reset: {
-    backgroundColor: "white",
-    marginLeft: "10px"
-
+    backgroundColor: 'white',
+    marginLeft: '10px'
   }
 });
 
 class MessageForm extends React.Component {
-
-  
-
   handleSubmit = e => {
     e.preventDefault();
   };
@@ -55,18 +49,15 @@ class MessageForm extends React.Component {
     const { classes, group, event, messageBody } = this.props;
     return (
       <div>
-        <Typography variant="h5" component="h1">
+        <Typography variant='h5' component='h1'>
           Send a Message
         </Typography>
 
         <Paper className={classes.root} elevation={1}>
-        <Typography variant="h5" component="h3">
+          <Typography variant='h5' component='h3'>
             Who do you want to send it to?
           </Typography>
 
-
-  
-           
           <Typography component='p'>Select a contact:</Typography>
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
@@ -104,25 +95,24 @@ class MessageForm extends React.Component {
             autoComplete='off'
             onSubmit={this.handleSubmit}
           >
-
-<TextField
+            <TextField
               required
-              id="outlined-required"
-              label="Subject"
+              id='outlined-required'
+              label='Subject'
               className={classes.textField}
-              margin="normal"
-              variant="outlined"
+              margin='normal'
+              variant='outlined'
               fullWidth
             />
 
             <TextField
-              id="outlined-multiline-static"
-              label="Message"
+              id='outlined-multiline-static'
+              label='Message'
               multiline
-              rows="4"
+              rows='4'
               className={classes.textField}
-              margin="normal"
-              variant="outlined"
+              margin='normal'
+              variant='outlined'
               fullWidth
               name='messageBody'
               value={messageBody}
@@ -130,9 +120,9 @@ class MessageForm extends React.Component {
               required
             />
             <Button
-              type="submit"
-              variant="contained"
-              color="primary"
+              type='submit'
+              variant='contained'
+              color='primary'
               className={classes.button}
             >
               Send
@@ -140,14 +130,12 @@ class MessageForm extends React.Component {
               <Icon className={classes.rightIcon}>send</Icon>
             </Button>
             <Button
-              variant="contained"
-              className={classes.button}
-              className={classes.reset}
+              variant='contained'
+              className={classes.reset + classes.button}
             >
               Reset
             </Button>
           </form>
-
         </Paper>
       </div>
     );

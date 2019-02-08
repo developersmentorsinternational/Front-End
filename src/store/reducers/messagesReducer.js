@@ -6,25 +6,24 @@ import {
   GET_MESSAGE_LOADING,
   GET_MESSAGE_SUCCESS,
   GET_MESSAGE_FAILED,
-  SEND_MESSAGE_FAILED
+  SEND_MESSAGE_FAILED,
+  GET_CLIENTS_SUCCESS,
+  GET_EVENTS_SUCCESS,
+  GET_GROUPS_SUCCESS
 } from '../types';
 const initialState = {
   user: [],
-  messages: [
-    {
-      event: '1',
-      group: '1',
-      messageBody: '20'
-    }
-  ],
+  messages: [],
   event: '',
   group: '',
-  messageBody: '',
+  body: '',
   sendMessageLoading: false,
   sendMessageSuccess: false,
   getMessageLoading: false,
   deleteScheduleLoading: false,
-  error: ''
+  error: '',
+  clients: [],
+  events: []
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -73,6 +72,21 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload
+      };
+    case GET_CLIENTS_SUCCESS:
+      return {
+        ...state,
+        clients: action.payload
+      };
+    case GET_EVENTS_SUCCESS:
+      return {
+        ...state,
+        events: action.payload
+      };
+    case GET_GROUPS_SUCCESS:
+      return {
+        ...state,
+        group: action.payload
       };
     default:
       return state;
