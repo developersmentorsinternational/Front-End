@@ -30,6 +30,9 @@ const styles = {
     paddingLeft: '10px',
     borderRadius: '3px',
     height: '25px'
+  },
+  nav: {
+    backgroundColor: '#1CAFBF'
   }
 };
 
@@ -50,7 +53,7 @@ function ButtonAppBar(props) {
   const { classes, loginEmail, loginPassword } = props;
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='static' className={classes.nav}>
         <Toolbar>
           <Typography variant='h6' color='inherit' className={classes.grow}>
             Mentor's International Training Reminders
