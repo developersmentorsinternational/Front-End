@@ -11,8 +11,8 @@ import DateFnsUtils from '@date-io/date-fns';
 class App extends React.Component {
   componentDidMount() {
     this.props.getRegions();
-    
-    if (localStorage.token) {
+
+    if (window.localStorage.token) {
       this.props.history.push('/dashboard');
     } else {
       this.props.history.push('/signup');

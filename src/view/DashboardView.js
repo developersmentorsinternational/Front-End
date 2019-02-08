@@ -1,14 +1,23 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard/Dashboard';
 import { connect } from 'react-redux';
-import { getUsers } from '../store/actions';
+import {
+  getUsers,
+  getMessages,
+ 
+  getGroups,
+  getEvents
+} from '../store/actions';
 
 class DashboardView extends React.Component {
   componentDidMount() {
     this.props.getUsers();
+    this.props.getMessages();
+    this.props.getGroups();
+    this.props.getEvents();
   }
   render() {
-    if (!localStorage.token) {
+    if (!window.localStorage.token) {
       this.props.history.push('/signup');
     }
     return (
@@ -24,5 +33,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getUsers, getMessages, getGroups, getEvents }
 )(DashboardView);

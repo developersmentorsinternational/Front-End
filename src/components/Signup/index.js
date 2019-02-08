@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -508,16 +507,7 @@ console.log(user)
   );
 }
 
-SignupForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  phoneNumber: PropTypes.string,
-  password: PropTypes.string,
-  confirmPassword: PropTypes.string,
-  countryCode: PropTypes.string
-};
+
 
 const mapStateToProps = state => ({
   firstName: state.auth.firstName,

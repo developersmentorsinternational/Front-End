@@ -13,7 +13,8 @@ import {
   POPULATE_SCHEDULE,
   UPDATE_SCHEDULE_LOADING,
   UPDATE_SCHEDULE_SUCCESS,
-  UPDATE_SCHEDULE_FAILED
+  UPDATE_SCHEDULE_FAILED,
+  SET_GROUP_EVENT
 } from '../types';
 
 const initialState = {
@@ -38,6 +39,11 @@ const initialState = {
 // cronjob https://crontab.guru/
 const schedulesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_GROUP_EVENT:
+    return {
+      ...state,
+      schedules: action.payload
+    }
     case HANDLE_SCHEDULE_CHANGE:
       return {
         ...state,

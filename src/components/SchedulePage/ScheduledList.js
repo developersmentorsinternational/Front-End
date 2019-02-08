@@ -8,14 +8,16 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    maxWidth: '500px',
+    maxWidth: '800px',
     width: '100%',
     margin: '0 auto'
   },
   noActivity: {
-    maxWidth: '500px',
+    maxWidth: '800px',
     width: '100%',
-    margin: '0 auto'
+    margin: '0 auto',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 

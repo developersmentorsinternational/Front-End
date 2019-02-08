@@ -49,7 +49,7 @@ const styles = theme => ({
 });
 
 const Schedule = props => {
-  const { classes, schedule } = props;
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
