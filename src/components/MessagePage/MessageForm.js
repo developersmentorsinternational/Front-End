@@ -23,10 +23,10 @@ const styles = theme => ({
     width: '100%',
     margin: '0 auto'
   },
-  chip: {
-    margin: theme.spacing.unit / 2
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
   },
-
   button: {
     backgroundColor: '#00AFC1'
   },
@@ -38,8 +38,28 @@ const styles = theme => ({
 });
 
 class MessageForm extends React.Component {
+  state = {
+    event: '',
+    group: ''
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   handleSubmit = e => {
     e.preventDefault();
+    // let date = `${this.state.selectedDate}`;
+    // let newDate = date.match(/\d+(?=:)/gi);
+    // const hour = newDate[0];
+    // const minute = newDate[1];
+    // console.log(this.props.event, this.props.group);
+    this.props.setGroupEvent(
+      this.state.event,
+      this.state.group,
+      this.props.messageBody
+    );
   };
 
   handleMessageChange = e => {
@@ -62,26 +82,40 @@ class MessageForm extends React.Component {
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
             <Select
-              value={event}
-              onChange={this.props.handleMessageChange}
+              value={this.state.event}
+              onChange={this.handleChange}
               input={<FilledInput name='event' id='filled-age-simple' />}
             >
-              <MenuItem value=''>
+              <MenuItem value='' className={classes.hello}>
                 <em>None</em>
               </MenuItem>
+              {this.props.events.length === 0
+                ? null
+                : this.props.events.map(event => (
+                    <MenuItem value={event.id} key={event.id}>
+                      {`${event.name} start date: ${event.start}`}
+                    </MenuItem>
+                  ))}
               {/* map through event array here to <MenuItem /> */}
             </Select>
           </FormControl>
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Group</InputLabel>
             <Select
-              value={group}
-              onChange={this.props.handleMessageChange}
+              value={this.state.group}
+              onChange={this.handleChange}
               input={<FilledInput name='group' id='filled-age-simple' />}
             >
               <MenuItem value=''>
                 <em>None</em>
               </MenuItem>
+              {this.props.groups.length === 0
+                ? null
+                : this.props.groups.map(group => (
+                    <MenuItem value={group.id} key={group.id}>
+                      {group.name}
+                    </MenuItem>
+                  ))}
               {/* map through group array here  */}
               {/* <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
@@ -95,16 +129,6 @@ class MessageForm extends React.Component {
             autoComplete='off'
             onSubmit={this.handleSubmit}
           >
-            <TextField
-              required
-              id='outlined-required'
-              label='Subject'
-              className={classes.textField}
-              margin='normal'
-              variant='outlined'
-              fullWidth
-            />
-
             <TextField
               id='outlined-multiline-static'
               label='Message'
@@ -145,7 +169,9 @@ class MessageForm extends React.Component {
 const mapStateToProps = state => ({
   group: state.messages.group,
   event: state.messages.event,
-  messageBody: state.messages.messageBody
+  messageBody: state.messages.messageBody,
+  events: state.messages.events,
+  groups: state.messages.group
 });
 
 export default connect(
