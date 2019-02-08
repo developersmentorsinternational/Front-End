@@ -66,9 +66,7 @@ class MessageForm extends React.Component {
 
 
   
-
            
-
           <Typography component='p'>Select a contact:</Typography>
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
