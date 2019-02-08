@@ -21,7 +21,6 @@ const initialState = {
   schedules: [],
   event: '',
   group: '',
-  messageBody: '',
   date: {
     minute: '',
     hour: '',
@@ -40,10 +39,10 @@ const initialState = {
 const schedulesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_GROUP_EVENT:
-    return {
-      ...state,
-      schedules: action.payload
-    }
+      return {
+        ...state,
+        schedules: action.payload
+      };
     case HANDLE_SCHEDULE_CHANGE:
       return {
         ...state,

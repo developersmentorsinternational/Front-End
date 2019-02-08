@@ -99,13 +99,13 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         group: action.payload,
         isLoading: false,
-        isSent: true,
-        messageBody: ''
+        isSent: true
       };
     case SET_GROUP_EVENT_LOADING:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        messageBody: ''
       };
     case SET_GROUP_EVENT_FAILED:
       return {
