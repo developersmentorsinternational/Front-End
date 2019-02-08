@@ -22,6 +22,11 @@ import {
   handleBodyChange,
   setGroupEvent
 } from '../../store/actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
+
+
 
 const styles = theme => ({
   root: {
@@ -44,8 +49,22 @@ class ScheduleForm extends React.Component {
     selectedDate: new Date(),
     labelWidth: 0,
     event: '',
-    group: ''
+    group: '',
+    open: false
   };
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
 
   handleChange = e => {
     this.setState({
@@ -323,7 +342,11 @@ class ScheduleForm extends React.Component {
             <Button variant='contained' className={classes.button}>
               Reset
             </Button>
-          </form>
+            </form>
+            {this.props.isLoading ? (<div>
+            <CircularProgress className={classes.progress} />
+            </div>) : null}
+          
         </Paper>
       </div>
     );
@@ -340,7 +363,8 @@ const mapStateToProps = state => ({
   date: state.schedules.date,
   events: state.messages.events,
   groups: state.messages.group,
-  isUpdating: state.schedules.isUpdating
+  isUpdating: state.schedules.isUpdating,
+  isLoading: state.messages.isLoading
 });
 
 export default connect(

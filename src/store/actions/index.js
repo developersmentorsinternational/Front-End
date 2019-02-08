@@ -199,7 +199,7 @@ export const handleMessageChange = (name, value) => ({
 });
 
 //------------
-// schedule reducers
+// schedule reducers CRUD section -------//
 //---------------
 
 export const getSchedule = () => dispatch => {
@@ -287,6 +287,8 @@ export const updateSchedule = (beingUpdated, schedule) => dispatch => {
     );
 };
 
+// END OF CRUD SECTION
+
 export const getRegions = () => dispatch => {
   dispatch({
     type: GET_REGIONS_LOADING
@@ -347,19 +349,21 @@ export const getGroups = () => dispatch => {
 
 export const setGroupEvent = (event, group, body) => dispatch => {
   dispatch({
-    type:SET_GROUP_EVENT_LOADING
-  })
+    type: SET_GROUP_EVENT_LOADING
+  });
   console.log(event, group, body);
   axios
-    .post(`${baseURL}/api/set-group-event`, { event, group, body })
+    .post(`${baseURL}/api/set-group-event-remind`, { event, group, body })
     .then(res =>
       dispatch({
         type: SET_GROUP_EVENT,
         payload: res.data
       })
     )
-    .catch(err => dispatch({
-      type:SET_GROUP_EVENT_FAILED,
-      payload: err.data
-    }));
+    .catch(err =>
+      dispatch({
+        type: SET_GROUP_EVENT_FAILED,
+        payload: err.data
+      })
+    );
 };
