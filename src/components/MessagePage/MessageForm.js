@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -13,35 +14,35 @@ import FilledInput from '@material-ui/core/FilledInput';
 import { connect } from 'react-redux';
 import { handleMessageChange } from '../../store/actions';
 
+
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    maxWidth: '700px',
-    width: '100%',
-    margin: '0 auto'
+
+    maxWidth: "1000px",
+    width: "100%",
+    margin: "0 auto"
   },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120
+  chip: {
+    margin: theme.spacing.unit / 2
+  },
+
+  button: {
+    backgroundColor: "#00AFC1"
+  },
+
+  reset: {
+    backgroundColor: "white",
+    marginLeft: "10px"
+
   }
 });
 
 class MessageForm extends React.Component {
-  handleDelete = data => () => {
-    if (data.label === 'React') {
-      alert('Why would you want to delete React?! :)'); // eslint-disable-line no-alert
-      return;
-    }
 
-    this.setState(state => {
-      const chipData = [...state.chipData];
-      const chipToDelete = chipData.indexOf(data);
-      chipData.splice(chipToDelete, 1);
-      return { chipData };
-    });
-  };
+  
 
   handleSubmit = e => {
     e.preventDefault();
@@ -54,13 +55,29 @@ class MessageForm extends React.Component {
     const { classes, group, event, messageBody } = this.props;
     return (
       <div>
-        <Typography variant='h5' component='h1'>
+        <Typography variant="h5" component="h1">
           Send a Message
         </Typography>
+
         <Paper className={classes.root} elevation={1}>
-          <Typography variant='h5' component='h3'>
+          <Typography variant="h5" component="h3">
             Who do you want to send it to?
           </Typography>
+
+
+  
+
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+              required
+              id="outlined-required"
+              label="Subject"
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
+
           <Typography component='p'>Select a contact:</Typography>
           <FormControl variant='filled' className={classes.formControl}>
             <InputLabel htmlFor='filled-age-simple'>Event</InputLabel>
@@ -98,14 +115,15 @@ class MessageForm extends React.Component {
             autoComplete='off'
             onSubmit={this.handleSubmit}
           >
+
             <TextField
-              id='outlined-multiline-static'
-              label='Message'
+              id="outlined-multiline-static"
+              label="Message"
               multiline
-              rows='4'
+              rows="4"
               className={classes.textField}
-              margin='normal'
-              variant='outlined'
+              margin="normal"
+              variant="outlined"
               fullWidth
               name='messageBody'
               value={messageBody}
@@ -113,24 +131,24 @@ class MessageForm extends React.Component {
               required
             />
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               className={classes.button}
             >
               Send
               {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
               <Icon className={classes.rightIcon}>send</Icon>
             </Button>
-            <Button variant='contained' className={classes.button}>
+            <Button
+              variant="contained"
+              className={classes.button}
+              className={classes.reset}
+            >
               Reset
             </Button>
           </form>
-          {/* <h2>
-            Post request that will be sent out to mentors, individual, cohort or
-            by a certain group. add response back to message array of objects
-            and list them in the front page from the most recent. limit to 3-5
-          </h2> */}
+
         </Paper>
       </div>
     );
