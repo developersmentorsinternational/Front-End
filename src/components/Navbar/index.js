@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import { handleChange, login } from '../../store/actions';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import { handleChange, login } from "../../store/actions";
+import { withRouter } from "react-router-dom";
 
 const styles = {
   root: {
@@ -21,15 +21,18 @@ const styles = {
     marginRight: 20
   },
   form: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   },
   input: {
-    marginLeft: '10px',
-    paddingLeft: '10px',
-    borderRadius: '3px',
-    height: '25px'
+    marginLeft: "10px",
+    paddingLeft: "10px",
+    borderRadius: "3px",
+    height: "25px"
+  },
+  navbar: {
+    backgroundColor: "#00AFC1"
   }
 };
 
@@ -46,32 +49,32 @@ function ButtonAppBar(props) {
   const { classes, loginEmail, loginPassword } = props;
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar className={classes.navbar} position="static">
         <Toolbar>
-          <Typography variant='h6' color='inherit' className={classes.grow}>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
             Mentor's International Training Reminders
           </Typography>
 
           <form className={classes.form} onSubmit={handleLoginSubmit}>
             <input
-              type='email'
-              placeholder='Email'
+              type="email"
+              placeholder="Email"
               required
-              name='loginEmail'
+              name="loginEmail"
               value={loginEmail}
               onChange={handleChange}
               className={classes.input}
             />
             <input
-              type='password'
-              placeholder='Password'
+              type="password"
+              placeholder="Password"
               required
-              name='loginPassword'
+              name="loginPassword"
               value={loginPassword}
               onChange={handleChange}
               className={classes.input}
             />
-            <Button type='submit' color='inherit'>
+            <Button type="submit" color="inherit">
               Login
             </Button>
           </form>
