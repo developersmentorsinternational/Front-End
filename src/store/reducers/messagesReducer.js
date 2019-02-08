@@ -26,7 +26,8 @@ const initialState = {
   error: '',
   clients: [],
   events: [],
-  isLoading: false
+  isLoading: false,
+  isSent: true
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -90,7 +91,8 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         group: action.payload,
-        isLoading: false
+        isLoading: false,
+        isSent: true
       };
       case SET_GROUP_EVENT_LOADING: 
       return {

@@ -21,14 +21,14 @@ export const mainListItems = (
       </ListItem>
     </NavLink>
 
-    <NavLink to='/dashboard/message'>
+    {/* <NavLink to='/dashboard/message'>
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary='Send a Message' />
       </ListItem>
-    </NavLink>
+    </NavLink> */}
     <NavLink to='/dashboard/schedule/home'>
       <ListItem button>
         <ListItemIcon>
