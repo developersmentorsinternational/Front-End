@@ -24,10 +24,6 @@ import {
 } from '../../store/actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-
-
-
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
@@ -65,7 +61,6 @@ class ScheduleForm extends React.Component {
     this.setState({ open: false });
   };
 
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -94,6 +89,10 @@ class ScheduleForm extends React.Component {
       this.state.group,
       this.props.messageBody
     );
+    this.setState({
+      event: '',
+      group: ''
+    });
   };
 
   handleScheduleChange = e => {
@@ -342,11 +341,12 @@ class ScheduleForm extends React.Component {
             <Button variant='contained' className={classes.button}>
               Reset
             </Button>
-            </form>
-            {this.props.isLoading ? (<div>
-            <CircularProgress className={classes.progress} />
-            </div>) : null}
-          
+          </form>
+          {/* {this.props.isLoading ? (
+            <div>
+              <CircularProgress className={classes.progress} />
+            </div>
+          ) : null} */}
         </Paper>
       </div>
     );
@@ -356,7 +356,7 @@ class ScheduleForm extends React.Component {
 const mapStateToProps = state => ({
   group: state.schedules.group,
   event: state.schedules.event,
-  messageBody: state.schedules.messageBody,
+  messageBody: state.messages.messageBody,
   dayOfTheWeek: state.schedules.date.dayOfTheWeek,
   dayOfTheMonth: state.schedules.date.dayOfTheMonth,
   month: state.schedules.date.month,

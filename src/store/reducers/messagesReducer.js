@@ -11,7 +11,8 @@ import {
   GET_EVENTS_SUCCESS,
   GET_GROUPS_SUCCESS,
   SET_GROUP_EVENT_LOADING,
-  SET_GROUP_EVENT_FAILED
+  SET_GROUP_EVENT_FAILED,
+  HANDLE_BODY_CHANGE
 } from '../types';
 const initialState = {
   user: [],
@@ -27,12 +28,18 @@ const initialState = {
   clients: [],
   events: [],
   isLoading: false,
-  isSent: true
+  isSent: true,
+  messageBody: ''
 };
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case HANDLE_MESSAGE_CHANGES:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      };
+    case HANDLE_BODY_CHANGE:
       return {
         ...state,
         [action.payload.name]: action.payload.value
@@ -92,7 +99,8 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         group: action.payload,
         isLoading: false,
-        isSent: true
+        isSent: true,
+        messageBody: ''
       };
     case SET_GROUP_EVENT_LOADING:
       return {
