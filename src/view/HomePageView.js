@@ -61,6 +61,7 @@ const HomePageView = props => {
         <div className={classes.root}>
           <div className={classes.container}>
             <div className={classes.message}>
+              <h2>Messages</h2>
               {messages.length === 0 ? (
                 <div className={classes.noActivity}>
                   <h2>No recent messages</h2>
@@ -72,6 +73,7 @@ const HomePageView = props => {
               )}
             </div>
             <div className={classes.schedule}>
+              <h2>Events</h2>
               {schedules.length === 0 ? (
                 <div className={classes.noActivity}>
                   <h2>No active schedules</h2>
