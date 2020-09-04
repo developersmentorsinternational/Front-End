@@ -9,7 +9,7 @@
     "axios": "^0.18.0",
     "date-fns": "2.0.0-alpha.25",
     "material-ui-pickers": "^2.1.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
